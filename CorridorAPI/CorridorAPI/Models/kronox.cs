@@ -10,6 +10,11 @@ namespace CorridorAPI.Models
 {
     public class kronox
     {
+        /// <summary>
+        /// GET
+        /// </summary>
+        /// <param name="roomNr">a string ex E2420</param>
+        /// <returns>Returns a json object with the schedule for the staff with the roomNr</returns>
         public static string getSchedule(string roomNr)
         {
             using (var client = new HttpClient())

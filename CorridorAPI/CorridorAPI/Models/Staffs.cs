@@ -8,6 +8,10 @@ namespace CorridorAPI.Models
 {
     public class Staffs
     {
+        /// <summary>
+        /// Konverts Json to List of Staffs
+        /// </summary>
+        /// <param name="json"></param>
         public Staffs(string json)
         {
             JObject jStaff = JObject.Parse(json);
