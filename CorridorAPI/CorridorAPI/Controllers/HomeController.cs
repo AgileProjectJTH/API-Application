@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CorridorAPI.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -10,6 +11,7 @@ namespace CorridorAPI.Controllers
     {
         public ActionResult Index()
         {
+            kronox.getSchedule("12312");
             ViewBag.Title = "Home Page";
 
             return View();
