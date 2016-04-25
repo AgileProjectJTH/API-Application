@@ -13,13 +13,14 @@ namespace CorridorAPI.Models
         /// <summary>
         /// GET
         /// </summary>
-        /// <param name="roomNr">a string ex E2420</param>
-        /// <returns>Returns a json object with the schedule for the staff with the roomNr</returns>
-        public static string getSchedule(string roomNr)
+        /// <param name="roomNr">number of staffs room ex E2420</param>
+        /// <param name="date">Date of witch day to get schedule, yyyy-mm-dd ex 2016-04-25</param>
+        /// <returns>Returns a json object with the schedule for the staff with the roomNr and Date (date may be null)</returns>
+        public static string getSchedule(string roomNr, string date)
         {
             using (var client = new HttpClient())
             {
-                HttpWebRequest httpWebRequest = (HttpWebRequest)WebRequest.Create("http://roomandschedule.hj.se/api/Rooms/E2420");
+                HttpWebRequest httpWebRequest = (HttpWebRequest)WebRequest.Create("http://roomandschedule.hj.se/api/Rooms/" + roomNr + "?" + date);
                 httpWebRequest.Method = WebRequestMethods.Http.Get;
                 httpWebRequest.Accept = "application/json; charset=utf-8";
                 httpWebRequest.ContentType = "application/json; charset=utf-8";

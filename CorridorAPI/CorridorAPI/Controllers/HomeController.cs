@@ -11,7 +11,7 @@ namespace CorridorAPI.Controllers
     {
         public ActionResult Index()
         {
-            kronox.getSchedule("12312");
+            kronox.getSchedule("E2420", null);
             ViewBag.Title = "Home Page";
 
             return View();
