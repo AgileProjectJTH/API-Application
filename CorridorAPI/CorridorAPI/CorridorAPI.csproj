@@ -194,6 +194,7 @@
     <Compile Include="Models\kronox.cs" />
     <Compile Include="Models\Schedule.cs" />
     <Compile Include="Models\Staff.cs" />
+    <Compile Include="Models\Staffs.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
