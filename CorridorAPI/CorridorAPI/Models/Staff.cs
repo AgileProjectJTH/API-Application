@@ -15,7 +15,7 @@ namespace CorridorAPI.Models
             firstname = (string)JsonStaff["Firstname"];
             lastname = (string)JsonStaff["Lastname"];
             mobile = (string)JsonStaff["Mobile"];
-            mail = (string)JsonStaff["Mail"];
+            email = (string)JsonStaff["Mail"];
             JArray jScheArr = (JArray)JsonStaff["Schedule"];
             for (int k = 0; k < jScheArr.Count; k++)
             {
@@ -30,11 +30,18 @@ namespace CorridorAPI.Models
                 schedules.Add(s);
             }
         }
+        public int staffId { get; set; }
         public string signature { get; set; }
         public string firstname { get; set; }
         public string lastname { get; set; }
         public string mobile { get; set; }
-        public string mail { get; set; }
-        public List<Schedule> schedules { get; set; }
+        public string email { get; set; }
+        public bool isAvailable { get; set; }
+        public bool isAdmin { get; set; }
+
+        public List<Schedule> schedules { get; set; } //ta bort?
+
+        public ICollection<Staff_Task> Staff_Task { get; set; }
+        public ICollection<Staff_Corridor> Staff_Corridor { get; set; }
     }
 }
