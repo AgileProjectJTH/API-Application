@@ -27,7 +27,7 @@ namespace CorridorAPI.Controllers
         public ActionResult GET(string dateAndTime)
         {
             string date = dateAndTime.Substring(0, 10);
-            string time = dateAndTime.Substring(11, 16);
+            string time = dateAndTime.Substring(11, 5);
             Staffs staffs = new Staffs(kronox.getSchedule("E2420", date));
             return null;
         }
