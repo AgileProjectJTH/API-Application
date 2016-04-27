@@ -23,6 +23,6 @@ namespace CorridorAPI.Models
                 staffs.Add(staff);
             }
         }
-        List<Staff> staffs { get; set; }
+        public List<Staff> staffs { get; set; }
     }
 }

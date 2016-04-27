@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CorridorAPI.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -19,6 +20,15 @@ namespace CorridorAPI.Controllers
            Set avaiable for the current time span */
         public ActionResult DELETE()
         {
+            return null;
+        }
+        /* GET: Api/Schedule
+           Returns: Returns schedule of given date for current user */
+        public ActionResult GET(string dateAndTime)
+        {
+            string date = dateAndTime.Substring(0, 10);
+            string time = dateAndTime.Substring(11, 16);
+            Staffs staffs = new Staffs(kronox.getSchedule("E2420", date));
             return null;
         }
     }

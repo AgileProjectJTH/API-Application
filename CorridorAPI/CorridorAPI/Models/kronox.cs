@@ -20,7 +20,7 @@ namespace CorridorAPI.Models
         {
             using (var client = new HttpClient())
             {
-                HttpWebRequest httpWebRequest = (HttpWebRequest)WebRequest.Create("http://roomandschedule.hj.se/api/Rooms/" + roomNr + "?" + date);
+                HttpWebRequest httpWebRequest = (HttpWebRequest)WebRequest.Create("http://roomandschedule.hj.se/api/Rooms/" + roomNr + "?date=" + date);
                 httpWebRequest.Method = WebRequestMethods.Http.Get;
                 httpWebRequest.Accept = "application/json; charset=utf-8";
                 httpWebRequest.ContentType = "application/json; charset=utf-8";

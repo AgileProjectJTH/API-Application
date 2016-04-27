@@ -12,9 +12,9 @@ namespace CorridorAPI
     {
         public DbSet<Staff> Staffs { get; set; }
         public DbSet<Staff_Task> Staffs_Tasks { get; set; }
-        public DbSet<Task> Staffs { get; set; }
         public DbSet<Staff_Corridor> Staffs_Corridors { get; set; }
         public DbSet<Corridor> Corridors { get; set; }
+        public DbSet<Task> Task { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json.Linq;
+﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -30,6 +31,11 @@ namespace CorridorAPI.Models
                 schedules.Add(s);
             }
         }
+        public string toJson(Staff staff)
+        {
+            return JsonConvert.SerializeObject(staff);
+        }
+
         public int staffId { get; set; }
         public string signature { get; set; }
         public string firstname { get; set; }
