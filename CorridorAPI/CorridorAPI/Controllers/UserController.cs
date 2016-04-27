@@ -11,31 +11,31 @@ namespace CorridorAPI.Controllers
     {
         /* POST: Api/User
            Creates a new user */
-        public ActionResult POST()
+        public IHttpActionResult POST()
         {
             return null;
         }
         /* GET: Api/User
            Returns: all users */
-        public ActionResult GET()
+        public IHttpActionResult GET()
         {
             return null;
         }
         /* GET: Api/User
            Returns: all users from a specific corridor */
-        public ActionResult GET(string corridorNr)
+        public IHttpActionResult GET(string corridorNr)
         {
             return null;
         }
         /* PUT: Api/User
            Updates a user */
-        public ActionResult PUT()
+        public IHttpActionResult PUT()
         {
             return null;
         }
         /* DELETE: Api/User
            Deletes a user */
-        public ActionResult DELETE()
+        public IHttpActionResult DELETE()
         {
             return null;
         }

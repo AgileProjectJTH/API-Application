@@ -7,6 +7,8 @@ using System.Web.Http;
 using System.Web.Mvc;
 using Repository.Repositories;
 using Common.Models;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace CorridorAPI.Controllers
 {
@@ -14,7 +16,7 @@ namespace CorridorAPI.Controllers
     {
         /* POST: Api/Staff
            Set staff to unavaible */
-        public ActionResult POST(string dateAndTime)
+        public IHttpActionResult POST(string dateAndTime)
         {
             string date = dateAndTime.Substring(0, 10);
             string time = dateAndTime.Substring(11, 5);
@@ -25,16 +27,16 @@ namespace CorridorAPI.Controllers
         /* GET: Api/Staff
          * Param: Date need format yyyy-mm-dd-hh-mm-ss
            Returns: Returns bool True if staff is avaible */
-        public ActionResult GET(string dateAndTime)
-        {
-            //Get room number
-            //List<Task> tasks = Repository.Repositories.Task.List();
-
-            //checks with kronox schedule if current user is available or not            
+        public IHttpActionResult GET(string dateAndTime)
+        {  
             string date = dateAndTime.Substring(0, 10);
             string time = dateAndTime.Substring(11, 5);
 
+            //TODO 
+            //Get Db info
+
             bool isAvailable = true;
+            //checks with kronox schedule if current user is available or not   
             Staffs staffs = new Staffs(kronox.getSchedule("E2420", date));
 
             for (int i = 0; i < staffs.staffs.Count ; i++)
@@ -57,7 +59,7 @@ namespace CorridorAPI.Controllers
                 }
             }
 
-            return null;
+            return Json(isAvailable);
         }
     }
 }

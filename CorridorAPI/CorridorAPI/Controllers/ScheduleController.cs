@@ -12,24 +12,30 @@ namespace CorridorAPI.Controllers
     {
         /* POST: Api/Schedule
            Set Unavaible for current time span */
-        public ActionResult POST()
+        public IHttpActionResult POST()
         {
             return null;
         }
+
         /* DELETE: Api/Schedule
            Set avaiable for the current time span */
-        public ActionResult DELETE()
+        public IHttpActionResult DELETE(string dateAndTime)
         {
             return null;
         }
+
         /* GET: Api/Schedule
            Returns: Returns schedule of given date for current user */
-        public ActionResult GET(string dateAndTime)
+        public IHttpActionResult GET(string dateAndTime)
         {
             string date = dateAndTime.Substring(0, 10);
             string time = dateAndTime.Substring(11, 5);
             Staffs staffs = new Staffs(kronox.getSchedule("E2420", date));
-            return null;
+
+            //TODO
+            //get schedule from db and convert it to staffs
+
+            return Json(staffs);
         }
     }
 }
