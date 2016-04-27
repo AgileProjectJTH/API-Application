@@ -5,6 +5,7 @@ using System.Web;
 using Microsoft.AspNet.Identity.EntityFramework;
 using System.Data.Entity;
 using CorridorAPI.Models;
+using Common.Models;
 
 namespace CorridorAPI
 {

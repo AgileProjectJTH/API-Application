@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CorridorAPI", "CorridorAPI\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Repository", "Repository\Repository.csproj", "{A46DD678-C0D9-458E-A2B5-C953F3EB2E0D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common", "Common\Common.csproj", "{FD3BA049-8D0F-48CA-AA03-CA6A22B43ACF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{A46DD678-C0D9-458E-A2B5-C953F3EB2E0D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A46DD678-C0D9-458E-A2B5-C953F3EB2E0D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A46DD678-C0D9-458E-A2B5-C953F3EB2E0D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FD3BA049-8D0F-48CA-AA03-CA6A22B43ACF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FD3BA049-8D0F-48CA-AA03-CA6A22B43ACF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FD3BA049-8D0F-48CA-AA03-CA6A22B43ACF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FD3BA049-8D0F-48CA-AA03-CA6A22B43ACF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

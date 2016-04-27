@@ -5,6 +5,8 @@ using System.Linq;
 using System.Web;
 using System.Web.Http;
 using System.Web.Mvc;
+using Repository.Repositories;
+using Common.Models;
 
 namespace CorridorAPI.Controllers
 {
@@ -25,9 +27,10 @@ namespace CorridorAPI.Controllers
            Returns: Returns bool True if staff is avaible */
         public ActionResult GET(string dateAndTime)
         {
+            //Get room number
+            //List<Task> tasks = Repository.Repositories.Task.List();
 
-            //checks with kronox schedule if current user is available or not
-            
+            //checks with kronox schedule if current user is available or not            
             string date = dateAndTime.Substring(0, 10);
             string time = dateAndTime.Substring(11, 5);
 

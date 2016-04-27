@@ -1,0 +1,7 @@
+C:\Users\Bjorn\Source\Repos\API-Application\CorridorAPI\Common\obj\Debug\Common.csprojResolveAssemblyReference.cache
+C:\Users\Bjorn\Source\Repos\API-Application\CorridorAPI\Common\bin\Debug\Common.dll
+C:\Users\Bjorn\Source\Repos\API-Application\CorridorAPI\Common\bin\Debug\Common.pdb
+C:\Users\Bjorn\Source\Repos\API-Application\CorridorAPI\Common\bin\Debug\Newtonsoft.Json.dll
+C:\Users\Bjorn\Source\Repos\API-Application\CorridorAPI\Common\bin\Debug\Newtonsoft.Json.xml
+C:\Users\Bjorn\Source\Repos\API-Application\CorridorAPI\Common\obj\Debug\Common.dll
+C:\Users\Bjorn\Source\Repos\API-Application\CorridorAPI\Common\obj\Debug\Common.pdb

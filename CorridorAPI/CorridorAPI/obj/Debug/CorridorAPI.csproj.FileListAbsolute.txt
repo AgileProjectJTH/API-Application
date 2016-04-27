@@ -65,3 +65,7 @@ C:\Users\Bjorn\Source\Repos\API-Application\CorridorAPI\CorridorAPI\bin\System.W
 C:\Users\Bjorn\Source\Repos\API-Application\CorridorAPI\CorridorAPI\bin\Antlr3.Runtime.pdb
 C:\Users\Bjorn\Source\Repos\API-Application\CorridorAPI\CorridorAPI\obj\Debug\CorridorAPI.dll
 C:\Users\Bjorn\Source\Repos\API-Application\CorridorAPI\CorridorAPI\obj\Debug\CorridorAPI.pdb
+C:\Users\Bjorn\Source\Repos\API-Application\CorridorAPI\CorridorAPI\bin\Common.dll
+C:\Users\Bjorn\Source\Repos\API-Application\CorridorAPI\CorridorAPI\bin\Repository.dll
+C:\Users\Bjorn\Source\Repos\API-Application\CorridorAPI\CorridorAPI\bin\Common.pdb
+C:\Users\Bjorn\Source\Repos\API-Application\CorridorAPI\CorridorAPI\bin\Repository.pdb
