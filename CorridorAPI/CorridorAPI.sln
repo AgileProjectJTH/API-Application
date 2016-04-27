@@ -1,9 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.24720.0
+VisualStudioVersion = 14.0.25123.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CorridorAPI", "CorridorAPI\CorridorAPI.csproj", "{986457D5-FFC3-4DBB-8E22-4498B728E167}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Repository", "Repository\Repository.csproj", "{A46DD678-C0D9-458E-A2B5-C953F3EB2E0D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{986457D5-FFC3-4DBB-8E22-4498B728E167}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{986457D5-FFC3-4DBB-8E22-4498B728E167}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{986457D5-FFC3-4DBB-8E22-4498B728E167}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A46DD678-C0D9-458E-A2B5-C953F3EB2E0D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A46DD678-C0D9-458E-A2B5-C953F3EB2E0D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A46DD678-C0D9-458E-A2B5-C953F3EB2E0D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A46DD678-C0D9-458E-A2B5-C953F3EB2E0D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
