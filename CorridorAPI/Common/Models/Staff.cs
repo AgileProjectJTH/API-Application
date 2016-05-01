@@ -45,6 +45,6 @@ namespace Common.Models
         public bool isAvailable { get; set; }
         public bool isAdmin { get; set; }
 
-        public List<Schedule> schedules { get; set; }
+        public List<Schedule> schedules { get; set; }*/
     }
 }

@@ -5,3 +5,4 @@ C:\Users\Bjorn\Source\Repos\API-Application\CorridorAPI\Common\bin\Debug\Newtons
 C:\Users\Bjorn\Source\Repos\API-Application\CorridorAPI\Common\bin\Debug\Newtonsoft.Json.xml
 C:\Users\Bjorn\Source\Repos\API-Application\CorridorAPI\Common\obj\Debug\Common.dll
 C:\Users\Bjorn\Source\Repos\API-Application\CorridorAPI\Common\obj\Debug\Common.pdb
+C:\Users\Mikael-SMG\Documents\GitHub\API-Application\CorridorAPI\Common\obj\Debug\Common.csprojResolveAssemblyReference.cache

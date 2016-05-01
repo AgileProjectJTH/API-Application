@@ -1,14 +1,15 @@
-﻿using Microsoft.AspNet.Identity.EntityFramework;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Data.Entity;
 using System.Linq;
-using System.Web;
+using System.Text;
+using System.Threading.Tasks;
 using Repository.Repositories;
+using System.Data.Entity;
+using Microsoft.AspNet.Identity.EntityFramework;
 
-namespace CorridorAPI
+namespace Repository.Repositories
 {
-    public class CorridorDB : IdentityDbContext<IdentityUser>
+    class CorridorDB : IdentityDbContext<IdentityUser>
     {
         public DbSet<Staff> Staffs { get; set; }
         public DbSet<Staff_Schedule> Staff_Schedules { get; set; }
@@ -25,6 +26,5 @@ namespace CorridorAPI
         {
 
         }
-
     }
 }

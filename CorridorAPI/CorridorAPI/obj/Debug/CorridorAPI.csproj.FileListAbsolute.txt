@@ -69,3 +69,4 @@ C:\Users\Bjorn\Source\Repos\API-Application\CorridorAPI\CorridorAPI\bin\Common.d
 C:\Users\Bjorn\Source\Repos\API-Application\CorridorAPI\CorridorAPI\bin\Repository.dll
 C:\Users\Bjorn\Source\Repos\API-Application\CorridorAPI\CorridorAPI\bin\Common.pdb
 C:\Users\Bjorn\Source\Repos\API-Application\CorridorAPI\CorridorAPI\bin\Repository.pdb
+C:\Users\Mikael-SMG\Documents\GitHub\API-Application\CorridorAPI\CorridorAPI\obj\Debug\CorridorAPI.csprojResolveAssemblyReference.cache

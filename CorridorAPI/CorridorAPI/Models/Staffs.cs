@@ -13,7 +13,7 @@ namespace CorridorAPI.Models
         /// Konverts Json to List of Staffs
         /// </summary>
         /// <param name="json"></param>
-        public Staffs(string json)
+       /* public Staffs(string json)
         {
             JObject jStaff = JObject.Parse(json);
             JArray jStaffArr = (JArray)jStaff["Staff"];
@@ -24,6 +24,6 @@ namespace CorridorAPI.Models
                 staffs.Add(staff);
             }
         }
-        public List<Staff> staffs { get; set; }
+        public List<Staff> staffs { get; set; }*/
     }
 }
