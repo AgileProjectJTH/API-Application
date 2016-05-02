@@ -25,6 +25,26 @@ namespace Repository.Repositories
         }
 
         /// <summary>
+        /// Adds a list of tasks
+        /// </summary>
+        /// <param name="tasks">Tasks to add</param>
+        public static void Post(List<Task> tasks)
+        {
+            try
+            {
+                using (var db = new CorridorDBEntities())
+                {
+                    db.Tasks.AddRange(tasks);
+                    db.SaveChanges();
+                }
+            }
+            catch (Exception e)
+            {
+
+                throw e;
+            }
+        }
+        /// <summary>
         /// Adds a task
         /// </summary>
         /// <param name="task">task to add</param>
@@ -34,7 +54,6 @@ namespace Repository.Repositories
             {
                 using (var db = new CorridorDBEntities())
                 {
-                    task.taskId = 1;
                     db.Tasks.Add(task);
                     db.SaveChanges();
                 }

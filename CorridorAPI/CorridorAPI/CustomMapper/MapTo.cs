@@ -25,6 +25,7 @@ namespace CorridorAPI.CustomMapper
             schedule.room = task.room;
             return schedule;
         }
+
         /// <summary>
         /// Mapps a List of db entity Task to a List of common.model Schedules
         /// </summary>
@@ -38,6 +39,21 @@ namespace CorridorAPI.CustomMapper
                 schedules.Add(Schedule(t));
             }
             return schedules;
+        }
+
+        /// <summary>
+        /// Maps a List of schedules to a list of Entity Tasks
+        /// </summary>
+        /// <param name="schedules">List of schedules</param>
+        /// <returns>Tasks</returns>
+        internal static List<Task> Task(List<Schedule> schedules)
+        {
+            List<Task> t = new List<Task>();
+            foreach (Schedule s in schedules)
+            {
+                t.Add(Task(s));
+            }
+            return t;
         }
 
         /// <summary>
