@@ -8,20 +8,23 @@ namespace Repository.Repositories
 {
     public class TaskRepository
     {
-        public static void test()
+        /// <summary>
+        /// Returns a list of task for a specific staff with the roomNr
+        /// </summary>
+        /// <param name="roomNr">Number of staffs room</param>
+        /// <returns>a list of Tasks</returns>
+        public static List<Task> List(string roomNr)
         {
+            List<Task> tasks;
             using (var db = new CorridorDBEntities())
             {
-                Corridor corObj = new Corridor();
-
-
-                corObj.name = "Test Corridor 11";
-
-                db.Corridors.Add(corObj);
-                db.SaveChanges();
+                tasks = db.Tasks.Where(x => x.room == roomNr).ToList();
             }
+
+            return tasks;
         }
-     }
+
+    }
 }
     
 

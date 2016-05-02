@@ -29,37 +29,55 @@ namespace CorridorAPI.Controllers
            Returns: Returns bool True if staff is avaible */
         public IHttpActionResult GET(string dateAndTime)
         {
-            TaskRepository.test();
+            //TODO Get Loged in user
+            //Mockup
+            string roomNr = "E2404";
+
+            
             string date = dateAndTime.Substring(0, 10);
             string time = dateAndTime.Substring(11, 5);
-
-            //TODO 
-            //Get Db info
-
             bool isAvailable = true;
-            //checks with kronox schedule if current user is available or not   
-            StaffModels staffmodels = new StaffModels(kronox.getSchedule("E2420", date));
-
-            for (int i = 0; i < staffmodels.staffModels.Count ; i++)
+            List<Schedule> schedule = CustomMapper.MapTo.schedules(TaskRepository.List(roomNr));
+            for (int i = 0; i < schedule.Count; i++)
             {
-                StaffModel staff = staffmodels.staffModels[i];
-                for (int k = 0; k < staff.schedules.Count; k++)
+                string from = schedule[i].from;
+                string to = schedule[i].to;
+                if (Convert.ToInt32(from.Substring(0, 2)) <= Convert.ToInt32(time.Substring(0, 2)) &&
+                    Convert.ToInt32(from.Substring(3, 2)) <= Convert.ToInt32(time.Substring(3, 2)))
                 {
-                    string from = staff.schedules[k].from;
-                    string to = staff.schedules[k].to;
-                    if (Convert.ToInt32(from.Substring(0, 2)) <= Convert.ToInt32(time.Substring(0, 2))&& 
-                        Convert.ToInt32(from.Substring(3, 2)) <= Convert.ToInt32(time.Substring(3, 2)))
+                    if (Convert.ToInt32(to.Substring(0, 2)) >= Convert.ToInt32(time.Substring(0, 2)) &&
+                        Convert.ToInt32(to.Substring(3, 2)) >= Convert.ToInt32(time.Substring(3, 2)))
                     {
-                        if (Convert.ToInt32(to.Substring(0, 2)) >= Convert.ToInt32(time.Substring(0, 2)) &&
-                            Convert.ToInt32(to.Substring(3, 2)) >= Convert.ToInt32(time.Substring(3, 2)))
-                        {
-                            isAvailable = false;
-                        }
-
+                        isAvailable = false;
                     }
                 }
             }
 
+            if (isAvailable)
+            {
+                //checks with kronox schedule if current user is available or not   
+                StaffModels staffmodels = new StaffModels(kronox.getSchedule("E2420", date));
+
+                for (int i = 0; i < staffmodels.staffModels.Count; i++)
+                {
+                    StaffModel staff = staffmodels.staffModels[i];
+                    for (int k = 0; k < staff.schedules.Count; k++)
+                    {
+                        string from = staff.schedules[k].from;
+                        string to = staff.schedules[k].to;
+                        if (Convert.ToInt32(from.Substring(0, 2)) <= Convert.ToInt32(time.Substring(0, 2)) &&
+                            Convert.ToInt32(from.Substring(3, 2)) <= Convert.ToInt32(time.Substring(3, 2)))
+                        {
+                            if (Convert.ToInt32(to.Substring(0, 2)) >= Convert.ToInt32(time.Substring(0, 2)) &&
+                                Convert.ToInt32(to.Substring(3, 2)) >= Convert.ToInt32(time.Substring(3, 2)))
+                            {
+                                isAvailable = false;
+                            }
+
+                        }
+                    }
+                }
+            }
             return Json(isAvailable);
         }
     }
