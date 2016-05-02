@@ -8,3 +8,12 @@ C:\Users\Bjorn\Source\Repos\API-Application\CorridorAPI\Repository\bin\Debug\New
 C:\Users\Bjorn\Source\Repos\API-Application\CorridorAPI\Repository\bin\Debug\Common.pdb
 C:\Users\Bjorn\Source\Repos\API-Application\CorridorAPI\Repository\bin\Debug\Newtonsoft.Json.xml
 C:\Users\Mikael-SMG\Documents\GitHub\API-Application\CorridorAPI\Repository\obj\Debug\Repository.csprojResolveAssemblyReference.cache
+C:\Users\Bjorn\Source\Repos\API-Application\CorridorAPI\Repository\bin\Debug\Repository.dll.config
+C:\Users\Bjorn\Source\Repos\API-Application\CorridorAPI\Repository\bin\Debug\EntityFramework.dll
+C:\Users\Bjorn\Source\Repos\API-Application\CorridorAPI\Repository\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\Bjorn\Source\Repos\API-Application\CorridorAPI\Repository\bin\Debug\Microsoft.AspNet.Identity.Core.dll
+C:\Users\Bjorn\Source\Repos\API-Application\CorridorAPI\Repository\bin\Debug\Microsoft.AspNet.Identity.EntityFramework.dll
+C:\Users\Bjorn\Source\Repos\API-Application\CorridorAPI\Repository\bin\Debug\EntityFramework.xml
+C:\Users\Bjorn\Source\Repos\API-Application\CorridorAPI\Repository\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\Bjorn\Source\Repos\API-Application\CorridorAPI\Repository\bin\Debug\Microsoft.AspNet.Identity.Core.xml
+C:\Users\Bjorn\Source\Repos\API-Application\CorridorAPI\Repository\bin\Debug\Microsoft.AspNet.Identity.EntityFramework.xml

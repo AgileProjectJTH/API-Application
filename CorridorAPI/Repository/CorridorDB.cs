@@ -9,7 +9,7 @@ using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace Repository.Repositories
 {
-    class CorridorDB : IdentityDbContext<IdentityUser>
+    public class CorridorDB : IdentityDbContext<IdentityUser>
     {
         public DbSet<Staff> Staffs { get; set; }
         public DbSet<Staff_Schedule> Staff_Schedules { get; set; }

@@ -3,13 +3,14 @@ using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace Common.Models
 {
-    public class Staff
+    public class StaffModel
     {
-        public Staff(JToken JsonStaff)
+        public StaffModel(JToken JsonStaff)
         {
             schedules = new List<Schedule>();
             signature = (string)JsonStaff["Signature"];
@@ -31,7 +32,7 @@ namespace Common.Models
                 schedules.Add(s);
             }
         }
-        public string toJson(Staff staff)
+        public string toJson(StaffModel staff)
         {
             return JsonConvert.SerializeObject(staff);
         }
@@ -45,6 +46,7 @@ namespace Common.Models
         public bool isAvailable { get; set; }
         public bool isAdmin { get; set; }
 
-        public List<Schedule> schedules { get; set; }*/
+        public List<Schedule> schedules { get; set; }
     }
 }
+

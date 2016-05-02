@@ -1,10 +1,12 @@
-﻿using CorridorAPI.Models;
+﻿using Common.Models;
+using CorridorAPI.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Http;
 using System.Web.Mvc;
+
 
 namespace CorridorAPI.Controllers
 {
@@ -30,7 +32,7 @@ namespace CorridorAPI.Controllers
         {
             string date = dateAndTime.Substring(0, 10);
             string time = dateAndTime.Substring(11, 5);
-            Staffs staffs = new Staffs(kronox.getSchedule("E2420", date));
+            StaffModels staffs = new StaffModels(kronox.getSchedule("E2420", date));
 
             //TODO
             //get schedule from db and convert it to staffs

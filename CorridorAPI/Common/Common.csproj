@@ -45,7 +45,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Models\Schedule.cs" />
-    <Compile Include="Models\Staff.cs" />
+    <Compile Include="Models\StaffModel.cs" />
+    <Compile Include="Models\StaffModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

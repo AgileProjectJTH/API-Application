@@ -28,7 +28,8 @@ namespace CorridorAPI.Controllers
          * Param: Date need format yyyy-mm-dd-hh-mm-ss
            Returns: Returns bool True if staff is avaible */
         public IHttpActionResult GET(string dateAndTime)
-        {  
+        {
+            TaskRepository.test();
             string date = dateAndTime.Substring(0, 10);
             string time = dateAndTime.Substring(11, 5);
 
@@ -37,11 +38,11 @@ namespace CorridorAPI.Controllers
 
             bool isAvailable = true;
             //checks with kronox schedule if current user is available or not   
-            Staffs staffs = new Staffs(kronox.getSchedule("E2420", date));
+            StaffModels staffmodels = new StaffModels(kronox.getSchedule("E2420", date));
 
-            for (int i = 0; i < staffs.staffs.Count ; i++)
+            for (int i = 0; i < staffmodels.staffModels.Count ; i++)
             {
-                Staff staff = staffs.staffs[i];
+                StaffModel staff = staffmodels.staffModels[i];
                 for (int k = 0; k < staff.schedules.Count; k++)
                 {
                     string from = staff.schedules[k].from;
