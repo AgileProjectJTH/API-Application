@@ -56,6 +56,17 @@ namespace CorridorAPI.CustomMapper
             return t;
         }
 
+        internal static StaffModel StaffModel(Staff staff)
+        {
+            StaffModel s = new StaffModel();
+            s.firstname = staff.firstname;
+            s.lastname = staff.lastname;
+            s.mobile = staff.mobile;
+            s.email = staff.email;
+            s.isAdmin = Convert.ToBoolean(staff.isAdmin);
+            return s;
+        }
+
         /// <summary>
         /// Mapps a schedule to a entity Task
         /// </summary>

@@ -10,6 +10,7 @@ namespace Common.Models
 {
     public class StaffModel
     {
+        public StaffModel() { }
         public StaffModel(JToken JsonStaff)
         {
             schedules = new List<Schedule>();
@@ -36,8 +37,7 @@ namespace Common.Models
         {
             return JsonConvert.SerializeObject(staff);
         }
-
-        public int staffId { get; set; }
+        
         public string signature { get; set; }
         public string firstname { get; set; }
         public string lastname { get; set; }

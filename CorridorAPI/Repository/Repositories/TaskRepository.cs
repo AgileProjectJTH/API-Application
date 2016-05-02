@@ -44,6 +44,7 @@ namespace Repository.Repositories
                 throw e;
             }
         }
+
         /// <summary>
         /// Adds a task
         /// </summary>

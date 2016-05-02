@@ -40,6 +40,7 @@ namespace CorridorAPI.Controllers
                     schedules.Add(new Schedule(roomNr, toDateAndTime.Substring(0, 10), "07-00", toDateAndTime.Substring(11, 5)));
                     TaskRepository.Post(CustomMapper.MapTo.Task(schedules));
                 }
+
                 //if only one day
                 else
                 {                    
@@ -61,8 +62,9 @@ namespace CorridorAPI.Controllers
         }
 
         /* DELETE: Api/Schedule
-           Set avaiable for the current time span */
-        public IHttpActionResult DELETE(string dateAndTime)
+         * Param: Date need format yyyy-mm-dd hh:mm:ss
+         * Delete Task that start with dateAndTime and ends with toDateAndTime */
+        public IHttpActionResult DELETE(string dateAndTime, string toDateAndTime)
         {
             return null;
         }
@@ -71,14 +73,27 @@ namespace CorridorAPI.Controllers
            Returns: Returns schedule of given date for current user */
         public IHttpActionResult GET(string dateAndTime)
         {
-            string date = dateAndTime.Substring(0, 10);
-            string time = dateAndTime.Substring(11, 5);
-            StaffModels staffs = new StaffModels(kronox.getSchedule("E2420", date));
+            try
+            {
+                //TODO Get Loged in user
+                //Mockup
+                //-----------------------
+                string roomNr = "E2404";
+                int staffId = 1;
+                //-----------------------
 
-            //TODO
-            //get schedule from db and convert it to staffs
-
-            return Json(staffs);
+                string date = dateAndTime.Substring(0, 10);
+                StaffModels staffs = new StaffModels(kronox.getSchedule("E2420", date));
+                
+                StaffModel staff = CustomMapper.MapTo.StaffModel(StaffRepository.Get(staffId));
+                staff.schedules.AddRange(CustomMapper.MapTo.Schedules(TaskRepository.List(roomNr)));
+                staffs.staffModels.Add(staff);
+                return Json(staffs);
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
         }
     }
 }
