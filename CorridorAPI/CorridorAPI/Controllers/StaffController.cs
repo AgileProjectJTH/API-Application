@@ -18,11 +18,29 @@ namespace CorridorAPI.Controllers
            Set staff to unavaible */
         public IHttpActionResult POST(string dateAndTime)
         {
-            string date = dateAndTime.Substring(0, 10);
-            string time = dateAndTime.Substring(11, 5);
-            string from = time.Substring(0, 2);
-            string to = time.Substring(3, 2);
-            return null;
+            try
+            {
+                //TODO Get Loged in user
+                //Mockup
+                string roomNr = "E2404";
+
+                string date = dateAndTime.Substring(0, 10);
+                string time = dateAndTime.Substring(11, 5);
+                string from = time.Substring(0, 2);
+                string to = time.Substring(3, 2);
+                Schedule schedule = new Schedule(roomNr, date, from, to);
+            
+                TaskRepository.Post(CustomMapper.MapTo.Task(schedule));
+                return Ok();
+            }
+            catch (Exception e)
+            {
+
+                return BadRequest(e.Message);
+            }
+            
+            
+
         }
         /* GET: Api/Staff
          * Param: Date need format yyyy-mm-dd-hh-mm-ss
@@ -37,7 +55,7 @@ namespace CorridorAPI.Controllers
             string date = dateAndTime.Substring(0, 10);
             string time = dateAndTime.Substring(11, 5);
             bool isAvailable = true;
-            List<Schedule> schedule = CustomMapper.MapTo.schedules(TaskRepository.List(roomNr));
+            List<Schedule> schedule = CustomMapper.MapTo.Schedules(TaskRepository.List(roomNr));
             for (int i = 0; i < schedule.Count; i++)
             {
                 string from = schedule[i].from;

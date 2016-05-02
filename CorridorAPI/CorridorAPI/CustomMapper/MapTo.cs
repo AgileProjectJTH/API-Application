@@ -14,7 +14,7 @@ namespace CorridorAPI.CustomMapper
         /// </summary>
         /// <param name="task"></param>
         /// <returns>Schedule</returns>
-        internal static Schedule schedule(Task task)
+        internal static Schedule Schedule(Task task)
         {
             Schedule schedule = new Schedule();
             schedule.course = task.course;
@@ -30,14 +30,38 @@ namespace CorridorAPI.CustomMapper
         /// </summary>
         /// <param name="task">List of Tasks</param>
         /// <returns>Schedules</returns>
-        internal static List<Schedule> schedules(List<Task> tasks)
+        internal static List<Schedule> Schedules(List<Task> tasks)
         {
             List<Schedule> schedules = new List<Schedule>();
             foreach (Task t in tasks)
             {
-                schedules.Add(schedule(t));
+                schedules.Add(Schedule(t));
             }
             return schedules;
+        }
+
+        /// <summary>
+        /// Mapps a schedule to a entity Task
+        /// </summary>
+        /// <param name="schedule"></param>
+        /// <returns>a Task</returns>
+        internal static Task Task(Schedule schedule)
+        {
+            Task t = new Task();
+            t.date = schedule.date;
+            t.fromTime = schedule.from;
+            t.toTime = schedule.to;
+            t.room = schedule.room;
+            if (schedule.moment != null)
+            {
+                t.moment = schedule.moment;
+            }
+            if (schedule.course != null)
+            {
+                t.course = schedule.course;
+            }
+            return t;
+            
         }
     }
 }

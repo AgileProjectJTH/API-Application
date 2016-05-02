@@ -24,6 +24,28 @@ namespace Repository.Repositories
             return tasks;
         }
 
+        /// <summary>
+        /// Adds a task
+        /// </summary>
+        /// <param name="task">task to add</param>
+        public static void Post(Task task)
+        {
+            try
+            {
+                using (var db = new CorridorDBEntities())
+                {
+                    task.taskId = 1;
+                    db.Tasks.Add(task);
+                    db.SaveChanges();
+                }
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+            
+        }
+
     }
 }
     

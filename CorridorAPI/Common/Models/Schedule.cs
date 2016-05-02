@@ -8,6 +8,21 @@ namespace Common.Models
 {
     public class Schedule
     {
+        public Schedule() { }
+        /// <summary>
+        /// Constructor
+        /// </summary>
+        /// <param name="newRoom">roomNr</param>
+        /// <param name="newDate">Date format yyyy-mm-dd-hh-mm-ss</param>
+        /// <param name="NewFrom">Time format hh-mm</param>
+        /// <param name="NewTo">Time format hh-mm</param>
+        public Schedule(string newRoom, string newDate, string NewFrom, string NewTo)
+        {
+            room = newRoom;
+            date = newDate;
+            from = NewFrom;
+            to = NewTo;
+        }
         public string room { get; set; }
         public string date { get; set; }
         public string from { get; set; }
