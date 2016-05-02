@@ -24,14 +24,14 @@ namespace CorridorAPI.Controllers
         // GET: Test/Create
         public ActionResult Create()
         {
-            using (var db = new CorridorDB())
-            {
-                Corridor corObj = new Corridor();
-                corObj.name = "Test Corridor 1";
+            //using (var db = new CorridorDB())
+            //{
+            //    Corridor corObj = new Corridor();
+            //    corObj.name = "Test Corridor 1";
 
-                db.Corridors.Add(corObj);
-                db.SaveChanges();
-            }
+            //    db.Corridors.Add(corObj);
+            //    db.SaveChanges();
+            //}
             return View();
         }
 

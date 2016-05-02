@@ -29,7 +29,6 @@ C:\Users\Bjorn\Source\Repos\API-Application\CorridorAPI\CorridorAPI\bin\Microsof
 C:\Users\Bjorn\Source\Repos\API-Application\CorridorAPI\CorridorAPI\bin\Microsoft.AspNet.Identity.EntityFramework.dll
 C:\Users\Bjorn\Source\Repos\API-Application\CorridorAPI\CorridorAPI\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
 C:\Users\Bjorn\Source\Repos\API-Application\CorridorAPI\CorridorAPI\bin\Microsoft.Web.Infrastructure.dll
-C:\Users\Bjorn\Source\Repos\API-Application\CorridorAPI\CorridorAPI\bin\Newtonsoft.Json.dll
 C:\Users\Bjorn\Source\Repos\API-Application\CorridorAPI\CorridorAPI\bin\System.Net.Http.Formatting.dll
 C:\Users\Bjorn\Source\Repos\API-Application\CorridorAPI\CorridorAPI\bin\System.Web.Helpers.dll
 C:\Users\Bjorn\Source\Repos\API-Application\CorridorAPI\CorridorAPI\bin\System.Web.Http.dll
