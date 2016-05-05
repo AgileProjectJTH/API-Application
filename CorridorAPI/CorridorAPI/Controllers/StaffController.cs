@@ -14,10 +14,11 @@ namespace CorridorAPI.Controllers
 {
     public class StaffController : ApiController
     {
-       
+
         /* GET: Api/Staff
          * Param: Date need format yyyy-mm-dd hh:mm:ss
            Returns: Returns bool True if staff is avaible */
+        
         public IHttpActionResult GET(string dateAndTime)
         {
             try

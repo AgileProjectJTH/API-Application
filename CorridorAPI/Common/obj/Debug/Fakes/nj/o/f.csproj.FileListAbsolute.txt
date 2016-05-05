@@ -1,0 +1,9 @@
+C:\Users\Kim\Source\Repos\API-Application\CorridorAPI\Common\obj\Debug\Fakes\nj\b\Newtonsoft.Json.Fakes.xml
+C:\Users\Kim\Source\Repos\API-Application\CorridorAPI\Common\obj\Debug\Fakes\nj\b\Newtonsoft.Json.Fakes.dll
+C:\Users\Kim\Source\Repos\API-Application\CorridorAPI\Common\obj\Debug\Fakes\nj\b\Newtonsoft.Json.Fakes.pdb
+C:\Users\Kim\Source\Repos\API-Application\CorridorAPI\Common\obj\Debug\Fakes\nj\b\Microsoft.QualityTools.Testing.Fakes.dll
+C:\Users\Kim\Source\Repos\API-Application\CorridorAPI\Common\obj\Debug\Fakes\nj\b\Newtonsoft.Json.dll
+C:\Users\Kim\Source\Repos\API-Application\CorridorAPI\Common\obj\Debug\Fakes\nj\b\Newtonsoft.Json.xml
+C:\Users\Kim\Source\Repos\API-Application\CorridorAPI\Common\obj\Debug\Fakes\nj\o\f.csprojResolveAssemblyReference.cache
+C:\Users\Kim\Source\Repos\API-Application\CorridorAPI\Common\obj\Debug\Fakes\nj\o\Newtonsoft.Json.Fakes.dll
+C:\Users\Kim\Source\Repos\API-Application\CorridorAPI\Common\obj\Debug\Fakes\nj\o\Newtonsoft.Json.Fakes.pdb
