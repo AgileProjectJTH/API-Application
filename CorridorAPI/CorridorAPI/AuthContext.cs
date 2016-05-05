@@ -11,7 +11,7 @@ namespace CorridorAPI
     public class AuthContext : IdentityDbContext<IdentityUser>
     {
         public AuthContext()
-            : base("CorridorDBEntities")
+            : base("AuthContext")
         {
 
         }
