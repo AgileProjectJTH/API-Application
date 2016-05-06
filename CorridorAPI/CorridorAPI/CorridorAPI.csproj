@@ -252,7 +252,6 @@
     <Compile Include="Controllers\ScheduleController.cs" />
     <Compile Include="Controllers\StaffController.cs" />
     <Compile Include="Controllers\UserController.cs" />
-    <Compile Include="CorridorDB.cs" />
     <Compile Include="CustomMapper\MapTo.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>

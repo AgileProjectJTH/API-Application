@@ -10,6 +10,7 @@ namespace Common.Models
     public class StaffModels
     {
         public StaffModels() { }
+
         /// <summary>
         /// Konverts Json to List of Staffs
         /// </summary>
@@ -25,6 +26,7 @@ namespace Common.Models
                 staffModels.Add(staff);
             }
         }
+
         public List<StaffModel> staffModels { get; set; }
     }
 }

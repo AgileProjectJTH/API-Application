@@ -14,6 +14,7 @@ namespace Common.Models
         {
             schedules = new List<Schedule>();
         }
+
         public StaffModel(JToken JsonStaff)
         {
             schedules = new List<Schedule>();
@@ -36,6 +37,7 @@ namespace Common.Models
                 schedules.Add(s);
             }
         }
+
         public string toJson(StaffModel staff)
         {
             return JsonConvert.SerializeObject(staff);

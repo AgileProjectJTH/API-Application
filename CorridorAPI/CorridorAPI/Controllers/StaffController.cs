@@ -76,7 +76,7 @@ namespace CorridorAPI.Controllers
                         }
                     }
                 }
-                return Json(isAvailable);                
+                return Json(isAvailable);
             }
 
             catch (Exception e)

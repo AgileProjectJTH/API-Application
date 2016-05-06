@@ -40,12 +40,14 @@ namespace CorridorAPI
 
             return user;
         }
+
         public void Delete(string userName)
         {
             IdentityUser user = _userManager.Users.Single(u => u.UserName == userName);
             _userManager.Delete(user);
             _ctx.SaveChanges();
-        }        
+        }
+               
         public void Dispose()
         {
             _ctx.Dispose();
