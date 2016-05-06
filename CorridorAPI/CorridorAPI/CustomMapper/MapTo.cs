@@ -93,6 +93,7 @@ namespace CorridorAPI.CustomMapper
             staffModel.lastname = staff.lastname;
             staffModel.email = staff.email;
             staffModel.mobile = staff.mobile;
+            staffModel.staffId = staff.staffId;
             if (staff.roomNr != null)
             {
                 staffModel.roomNr = staff.roomNr;

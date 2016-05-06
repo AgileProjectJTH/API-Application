@@ -4,11 +4,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Http;
-using System.Web.Mvc;
 using Repository.Repositories;
 using Common.Models;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using System.Security.Claims;
 
 namespace CorridorAPI.Controllers
 {
@@ -18,12 +18,14 @@ namespace CorridorAPI.Controllers
         /* GET: Api/Staff
          * Param: Date need format yyyy-mm-dd hh:mm:ss
            Returns: Returns bool True if staff is avaible */
-        
+        [Authorize]
         public IHttpActionResult GET(string dateAndTime)
         {
+            var identity = User.Identity as ClaimsIdentity;
+            string authenticatedUser = identity.FindFirst("sub").Value;
+
             try
             {
-
                 //TODO Get Loged in user
                 //Mockup
                 //-----------------------

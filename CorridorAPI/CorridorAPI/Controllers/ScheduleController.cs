@@ -4,9 +4,9 @@ using Repository.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Web;
 using System.Web.Http;
-using System.Web.Mvc;
 
 
 namespace CorridorAPI.Controllers
@@ -16,15 +16,16 @@ namespace CorridorAPI.Controllers
         /* POST: Api/Schedule            
          * Param: Date need format yyyy-mm-dd hh:mm:ss
          * Set staff to unavaible */
+        [Authorize]
         public IHttpActionResult POST(string fromDateAndTime, string toDateAndTime)
         {
+            var identity = User.Identity as ClaimsIdentity;
+            string authenticatedUser = identity.FindFirst("sub").Value;
+
             try
             {
-                //TODO Get Loged in user
-                //Mockup
-                //-----------------------
-                string roomNr = "E2404";
-                //-----------------------
+                StaffModel user = CustomMapper.MapTo.StaffModel(Repository.Repositories.StaffRepository.Get(authenticatedUser));                
+                
                 int numberOfDays = (Convert.ToInt32(Math.Floor(( DateTime.Parse(toDateAndTime)  -  DateTime.Parse(fromDateAndTime) ).TotalDays))+1);
 
                 //If more the one day
@@ -35,9 +36,9 @@ namespace CorridorAPI.Controllers
                     for (int i = 0; i < numberOfDays; i++)
                     {
                         string date = startDay.AddDays(i).ToString().Substring(0, 10);
-                        schedules.Add(new Schedule(roomNr, date, "07-00", "17-00"));
+                        schedules.Add(new Schedule(user.roomNr, date, "07-00", "17-00"));
                     }
-                    schedules.Add(new Schedule(roomNr, toDateAndTime.Substring(0, 10), "07-00", toDateAndTime.Substring(11, 5)));
+                    schedules.Add(new Schedule(user.roomNr, toDateAndTime.Substring(0, 10), "07-00", toDateAndTime.Substring(11, 5)));
                     TaskRepository.Post(CustomMapper.MapTo.Task(schedules));
                 }
 
@@ -48,7 +49,7 @@ namespace CorridorAPI.Controllers
                     string fromDate = fromDateAndTime.Substring(0, 10);
                     string from = fromDateAndTime.Substring(11, 5);
 
-                    Schedule schedule = new Schedule(roomNr, fromDate, from, to);
+                    Schedule schedule = new Schedule(user.roomNr, fromDate, from, to);
                     TaskRepository.Post(CustomMapper.MapTo.Task(schedule));
                 }
 
@@ -64,6 +65,7 @@ namespace CorridorAPI.Controllers
         /* DELETE: Api/Schedule
          * Param: Date need format yyyy-mm-dd hh:mm:ss
          * Delete Task that start with dateAndTime and ends with toDateAndTime */
+        [Authorize]
         public IHttpActionResult DELETE(string dateAndTime, string toDateAndTime)
         {
             return null;
@@ -71,22 +73,19 @@ namespace CorridorAPI.Controllers
 
         /* GET: Api/Schedule
            Returns: Returns schedule of given date for current user */
+        [Authorize]
         public IHttpActionResult GET(string dateAndTime)
         {
+            var identity = User.Identity as ClaimsIdentity;
+            string authenticatedUser = identity.FindFirst("sub").Value;
+
             try
             {
-                //TODO Get Loged in user
-                //Mockup
-                //-----------------------
-                string roomNr = "E2404";
-                int staffId = 1;
-                //-----------------------
-
+                StaffModel user = CustomMapper.MapTo.StaffModel(Repository.Repositories.StaffRepository.Get(authenticatedUser));                
                 string date = dateAndTime.Substring(0, 10);
-                StaffModels staffs = new StaffModels(kronox.getSchedule("E2420", date));
-                
-                StaffModel staff = CustomMapper.MapTo.StaffModel(StaffRepository.Get(staffId));
-                staff.schedules.AddRange(CustomMapper.MapTo.Schedules(TaskRepository.List(roomNr)));
+                StaffModels staffs = new StaffModels(kronox.getSchedule("E2420", date));                
+                StaffModel staff = CustomMapper.MapTo.StaffModel(StaffRepository.Get(user.staffId));
+                staff.schedules.AddRange(CustomMapper.MapTo.Schedules(TaskRepository.List(user.roomNr)));
                 staffs.staffModels.Add(staff);
                 return Json(staffs);
             }
