@@ -29,6 +29,7 @@ namespace Repository
         public Nullable<bool> isAdmin { get; set; }
         public string username { get; set; }
         public string roomNr { get; set; }
+        public string password { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Staff_Corridor> Staff_Corridor { get; set; }

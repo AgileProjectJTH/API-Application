@@ -46,6 +46,7 @@ namespace Common.Models
         public string mobile { get; set; }
         public string email { get; set; }
         public bool isAdmin { get; set; }
+        public string password { get; set; }
 
         public List<Schedule> schedules { get; set; }
     }

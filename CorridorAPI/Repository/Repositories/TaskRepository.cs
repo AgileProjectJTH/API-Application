@@ -38,10 +38,10 @@ namespace Repository.Repositories
                     db.SaveChanges();
                 }
             }
-            catch (Exception e)
+            catch (Exception)
             {
 
-                throw e;
+                throw;
             }
         }
 
@@ -59,9 +59,9 @@ namespace Repository.Repositories
                     db.SaveChanges();
                 }
             }
-            catch (Exception e)
+            catch (Exception)
             {
-                throw e;
+                throw;
             }
             
         }

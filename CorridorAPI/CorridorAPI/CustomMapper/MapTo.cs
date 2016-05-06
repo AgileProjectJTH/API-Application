@@ -1,4 +1,5 @@
 ﻿using Common.Models;
+using CorridorAPI.Models;
 using Repository;
 using System;
 using System.Collections.Generic;
@@ -54,18 +55,7 @@ namespace CorridorAPI.CustomMapper
                 t.Add(Task(s));
             }
             return t;
-        }
-
-        internal static StaffModel StaffModel(Staff staff)
-        {
-            StaffModel s = new StaffModel();
-            s.firstname = staff.firstname;
-            s.lastname = staff.lastname;
-            s.mobile = staff.mobile;
-            s.email = staff.email;
-            s.isAdmin = Convert.ToBoolean(staff.isAdmin);
-            return s;
-        }
+        }       
 
         /// <summary>
         /// Mapps a schedule to a entity Task
@@ -87,8 +77,80 @@ namespace CorridorAPI.CustomMapper
             {
                 t.course = schedule.course;
             }
-            return t;
-            
+            return t;            
+        }
+
+        /// <summary>
+        /// maps repository staff to common.model staff
+        /// </summary>
+        /// <param name="staff"></param>
+        /// <returns>common.model staff</returns>
+        internal static StaffModel StaffModel(Repository.Staff staff)
+        {
+            StaffModel staffModel = new StaffModel();
+            staffModel.username = staff.username;
+            staffModel.firstname = staff.firstname;
+            staffModel.lastname = staff.lastname;
+            staffModel.email = staff.email;
+            staffModel.mobile = staff.mobile;
+            if (staff.roomNr != null)
+            {
+                staffModel.roomNr = staff.roomNr;
+            }            
+            staffModel.isAdmin = Convert.ToBoolean(staff.isAdmin);
+
+            return staffModel;
+        }
+
+        /// <summary>
+        /// maps usermodel to repository staff
+        /// </summary>
+        /// <param name="userModel"></param>
+        /// <returns>repository staff</returns>
+        internal static Staff Staff(UserModel userModel)
+        {
+            Staff s = new Staff();
+            s.email = userModel.email;
+            s.firstname = userModel.firstname;
+            s.lastname = userModel.lastname;
+            s.mobile = userModel.mobile;
+            s.roomNr = userModel.roomNr;
+            s.username = userModel.UserName;
+            s.isAdmin = userModel.isAdmin;
+            return s;
+        }
+
+        /// <summary>
+        /// maps common.model staffmodel to repository staff
+        /// </summary>
+        /// <param name="staffModel"></param>
+        /// <returns>repository staff</returns>
+        internal static Staff Staff(StaffModel staffModel)
+        {
+            Staff s = new Staff();
+            s.email = staffModel.email;
+            s.firstname = staffModel.firstname;
+            s.lastname = staffModel.lastname;
+            s.mobile = staffModel.mobile;
+            s.roomNr = staffModel.roomNr;
+            s.username = staffModel.username;
+            s.isAdmin = staffModel.isAdmin;
+            return s;
+        }
+
+        /// <summary>
+        /// maps a list of repository staffs to a list of common.model staffmodel
+        /// </summary>
+        /// <param name="LStaff"></param>
+        /// <returns>common.model staffmodel</returns>
+        internal static List<StaffModel> StaffModel(List<Repository.Staff> LStaff)
+        {
+            List<StaffModel> LStaffModel = new List<StaffModel>();
+            foreach (Staff s in LStaff)
+            {
+                LStaffModel.Add(StaffModel(s));
+            }
+            return LStaffModel;
         }
     }
 }

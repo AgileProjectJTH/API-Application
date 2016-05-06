@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Common.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -13,25 +14,54 @@ namespace CorridorAPI.Controllers
            Returns: all users */
         public IHttpActionResult GET()
         {
-            return null;
+            StaffModels staffs = new StaffModels();
+            staffs.staffModels = CustomMapper.MapTo.StaffModel(Repository.Repositories.StaffRepository.List());
+            return Json(staffs);
         }
+
         /* GET: Api/User
            Returns: all users from a specific corridor */
-        public IHttpActionResult GET(string corridorNr)
+        public IHttpActionResult GET(int corridorNr)
         {
-            return null;
+            StaffModels staffs = new StaffModels();
+            staffs.staffModels = CustomMapper.MapTo.StaffModel(Repository.Repositories.StaffRepository.List(corridorNr));
+            return Json(staffs);
         }
+
         /* PUT: Api/User
            Updates a user */
-        public IHttpActionResult PUT()
+        public IHttpActionResult PUT(StaffModel staffModel)
         {
-            return null;
+            try
+            {
+                Repository.Repositories.StaffRepository.Update(CustomMapper.MapTo.Staff(staffModel));
+                
+                return Ok();
+            }
+            catch (Exception e)
+            {
+
+                return BadRequest(e.Message);
+            }
+            
         }
+
         /* DELETE: Api/User
            Deletes a user */
-        public IHttpActionResult DELETE()
+        public IHttpActionResult DELETE(string username)
         {
-            return null;
+            try
+            {
+                Repository.Repositories.StaffRepository.Delete(username);
+                AuthRepository _repo = new AuthRepository();
+                _repo.Delete(username);
+                return Ok("deleted");
+            }
+            catch (Exception e)
+            {
+
+                return BadRequest(e.Message);
+            }
         }
     }
 }

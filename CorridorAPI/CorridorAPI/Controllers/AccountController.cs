@@ -1,4 +1,5 @@
-﻿using CorridorAPI.Models;
+﻿using Common.Models;
+using CorridorAPI.Models;
 using Microsoft.AspNet.Identity;
 using System;
 using System.Collections.Generic;
@@ -40,7 +41,7 @@ namespace CorridorAPI.Controllers
             }
 
             //Save Username i db as staff
-            Repository.Repositories.UserRepository.Post(userModel);
+            Repository.Repositories.UserRepository.Post(CustomMapper.MapTo.Staff(userModel));
             return Ok();
         }
 

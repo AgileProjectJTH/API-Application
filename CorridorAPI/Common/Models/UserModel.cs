@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
-namespace CorridorAPI.Models
+namespace Common.Models
 {
     public class UserModel
     {
@@ -31,5 +31,7 @@ namespace CorridorAPI.Models
         public string mobile { get; set; }
         [Required]
         public bool isAdmin { get; set; }
+        [Required]
+        public string roomNr { get; set; }
     }
 }

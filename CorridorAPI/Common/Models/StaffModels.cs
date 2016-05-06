@@ -9,6 +9,7 @@ namespace Common.Models
 {
     public class StaffModels
     {
+        public StaffModels() { }
         /// <summary>
         /// Konverts Json to List of Staffs
         /// </summary>

@@ -22,6 +22,7 @@
     <NavigationProperty Name="Staff_Task" Relationship="Self.FK__Staff_Tas__staff__1A14E395" FromRole="Staff" ToRole="Staff_Task" />
     <Property Name="username" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="roomNr" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
   </EntityType>
   <EntityType Name="Staff_Corridor">
     <Key>

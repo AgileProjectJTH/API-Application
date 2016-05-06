@@ -19,6 +19,7 @@
     <Property Name="isAdmin" Type="bit" />
     <Property Name="username" Type="nvarchar" MaxLength="50" />
     <Property Name="roomNr" Type="nvarchar" MaxLength="10" />
+    <Property Name="password" Type="nvarchar" MaxLength="50" />
   </EntityType>
   <EntityType Name="Staff_Corridor">
     <Key>

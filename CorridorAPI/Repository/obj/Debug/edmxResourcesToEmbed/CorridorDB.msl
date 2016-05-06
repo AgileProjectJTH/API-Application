@@ -12,6 +12,7 @@
     <EntitySetMapping Name="Staffs">
       <EntityTypeMapping TypeName="CorridorDBModel.Staff">
         <MappingFragment StoreEntitySet="Staff">
+          <ScalarProperty Name="password" ColumnName="password" />
           <ScalarProperty Name="roomNr" ColumnName="roomNr" />
           <ScalarProperty Name="username" ColumnName="username" />
           <ScalarProperty Name="staffId" ColumnName="staffId" />

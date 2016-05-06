@@ -1,4 +1,5 @@
-﻿using CorridorAPI.Models;
+﻿using Common.Models;
+using CorridorAPI.Models;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using System;
@@ -39,7 +40,12 @@ namespace CorridorAPI
 
             return user;
         }
-
+        public void Delete(string userName)
+        {
+            IdentityUser user = _userManager.Users.Single(u => u.UserName == userName);
+            _userManager.Delete(user);
+            _ctx.SaveChanges();
+        }        
         public void Dispose()
         {
             _ctx.Dispose();
