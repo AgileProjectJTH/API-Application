@@ -26,8 +26,9 @@ namespace Repository
         public string lastname { get; set; }
         public string email { get; set; }
         public string mobile { get; set; }
-        public Nullable<bool> isAvailable { get; set; }
         public Nullable<bool> isAdmin { get; set; }
+        public string username { get; set; }
+        public string roomNr { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Staff_Corridor> Staff_Corridor { get; set; }

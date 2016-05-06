@@ -38,12 +38,13 @@ namespace Common.Models
             return JsonConvert.SerializeObject(staff);
         }
         
+        public string username { get; set; }
+        public string roomNr { get; set; }
         public string signature { get; set; }
         public string firstname { get; set; }
         public string lastname { get; set; }
         public string mobile { get; set; }
         public string email { get; set; }
-        public bool isAvailable { get; set; }
         public bool isAdmin { get; set; }
 
         public List<Schedule> schedules { get; set; }

@@ -30,7 +30,7 @@ namespace CorridorAPI.Controllers
                 return BadRequest(ModelState);
             }
 
-            IdentityResult result = await _repo.RegisterUser(userModel);
+            IdentityResult result = await _repo.RegisterUser((UserModel)userModel);
 
             IHttpActionResult errorResult = GetErrorResult(result);
 
@@ -39,6 +39,8 @@ namespace CorridorAPI.Controllers
                 return errorResult;
             }
 
+            //Save Username i db as staff
+            Repository.Repositories.UserRepository.Post(userModel);
             return Ok();
         }
 

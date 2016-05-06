@@ -17,10 +17,11 @@
     <Property Name="lastname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="email" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
     <Property Name="mobile" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
-    <Property Name="isAvailable" Type="Boolean" />
     <Property Name="isAdmin" Type="Boolean" />
     <NavigationProperty Name="Staff_Corridor" Relationship="Self.FK__Staff_Cor__staff__145C0A3F" FromRole="Staff" ToRole="Staff_Corridor" />
     <NavigationProperty Name="Staff_Task" Relationship="Self.FK__Staff_Tas__staff__1A14E395" FromRole="Staff" ToRole="Staff_Task" />
+    <Property Name="username" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="roomNr" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
   </EntityType>
   <EntityType Name="Staff_Corridor">
     <Key>

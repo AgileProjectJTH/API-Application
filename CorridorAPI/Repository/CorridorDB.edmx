@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="CorridorDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="CorridorDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Corridor">
           <Key>
             <PropertyRef Name="corridorId" />
@@ -21,8 +21,9 @@
           <Property Name="lastname" Type="nvarchar" MaxLength="50" />
           <Property Name="email" Type="nvarchar" MaxLength="100" />
           <Property Name="mobile" Type="nvarchar" MaxLength="30" />
-          <Property Name="isAvailable" Type="bit" />
           <Property Name="isAdmin" Type="bit" />
+          <Property Name="username" Type="nvarchar" MaxLength="50" />
+          <Property Name="roomNr" Type="nvarchar" MaxLength="10" />
         </EntityType>
         <EntityType Name="Staff_Corridor">
           <Key>
@@ -123,8 +124,7 @@
             <End Role="Staff_Task" EntitySet="Staff_Task" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="CorridorDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -145,10 +145,11 @@
           <Property Name="lastname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="email" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="mobile" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
-          <Property Name="isAvailable" Type="Boolean" />
           <Property Name="isAdmin" Type="Boolean" />
           <NavigationProperty Name="Staff_Corridor" Relationship="Self.FK__Staff_Cor__staff__145C0A3F" FromRole="Staff" ToRole="Staff_Corridor" />
           <NavigationProperty Name="Staff_Task" Relationship="Self.FK__Staff_Tas__staff__1A14E395" FromRole="Staff" ToRole="Staff_Task" />
+          <Property Name="username" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="roomNr" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="Staff_Corridor">
           <Key>
@@ -271,12 +272,13 @@
           <EntitySetMapping Name="Staffs">
             <EntityTypeMapping TypeName="CorridorDBModel.Staff">
               <MappingFragment StoreEntitySet="Staff">
+                <ScalarProperty Name="roomNr" ColumnName="roomNr" />
+                <ScalarProperty Name="username" ColumnName="username" />
                 <ScalarProperty Name="staffId" ColumnName="staffId" />
                 <ScalarProperty Name="firstname" ColumnName="firstname" />
                 <ScalarProperty Name="lastname" ColumnName="lastname" />
                 <ScalarProperty Name="email" ColumnName="email" />
                 <ScalarProperty Name="mobile" ColumnName="mobile" />
-                <ScalarProperty Name="isAvailable" ColumnName="isAvailable" />
                 <ScalarProperty Name="isAdmin" ColumnName="isAdmin" />
               </MappingFragment>
             </EntityTypeMapping>

@@ -8,13 +8,7 @@ using System.Web.Mvc;
 namespace CorridorAPI.Controllers
 {
     public class UserController : ApiController
-    {
-        /* POST: Api/User
-           Creates a new user */
-        public IHttpActionResult POST()
-        {
-            return null;
-        }
+    {        
         /* GET: Api/User
            Returns: all users */
         public IHttpActionResult GET()

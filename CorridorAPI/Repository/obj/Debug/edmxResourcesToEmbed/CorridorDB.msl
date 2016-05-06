@@ -12,12 +12,13 @@
     <EntitySetMapping Name="Staffs">
       <EntityTypeMapping TypeName="CorridorDBModel.Staff">
         <MappingFragment StoreEntitySet="Staff">
+          <ScalarProperty Name="roomNr" ColumnName="roomNr" />
+          <ScalarProperty Name="username" ColumnName="username" />
           <ScalarProperty Name="staffId" ColumnName="staffId" />
           <ScalarProperty Name="firstname" ColumnName="firstname" />
           <ScalarProperty Name="lastname" ColumnName="lastname" />
           <ScalarProperty Name="email" ColumnName="email" />
           <ScalarProperty Name="mobile" ColumnName="mobile" />
-          <ScalarProperty Name="isAvailable" ColumnName="isAvailable" />
           <ScalarProperty Name="isAdmin" ColumnName="isAdmin" />
         </MappingFragment>
       </EntityTypeMapping>
