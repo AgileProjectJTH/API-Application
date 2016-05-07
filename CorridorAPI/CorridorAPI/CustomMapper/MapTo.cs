@@ -171,7 +171,7 @@ namespace CorridorAPI.CustomMapper
         /// <returns></returns>
         internal static Corridor corridor(CorridorModel corridorModel)
         {
-            return new Corridor { name = corridorModel.corridorName, corridorId = corridorModel.corridorId };
+            return new Corridor { name = corridorModel.corridorName, corridorId = corridorModel.corridorId, eventInfo = corridorModel.eventInfo};
         }
 
         /// <summary>

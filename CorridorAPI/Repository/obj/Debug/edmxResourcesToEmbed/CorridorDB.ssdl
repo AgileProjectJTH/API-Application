@@ -6,6 +6,7 @@
     </Key>
     <Property Name="corridorId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="name" Type="nvarchar" MaxLength="50" />
+    <Property Name="eventInfo" Type="nvarchar(max)" />
   </EntityType>
   <EntityType Name="Staff">
     <Key>

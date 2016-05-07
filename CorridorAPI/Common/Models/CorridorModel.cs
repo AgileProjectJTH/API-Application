@@ -10,5 +10,6 @@ namespace Common.Models
     {
         public int corridorId { get; set; }
         public string corridorName { get; set; }
+        public string eventInfo { get; set; }
     }
 }

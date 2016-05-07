@@ -4,6 +4,7 @@
     <EntitySetMapping Name="Corridors">
       <EntityTypeMapping TypeName="CorridorDBModel.Corridor">
         <MappingFragment StoreEntitySet="Corridor">
+          <ScalarProperty Name="eventInfo" ColumnName="eventInfo" />
           <ScalarProperty Name="corridorId" ColumnName="corridorId" />
           <ScalarProperty Name="name" ColumnName="name" />
         </MappingFragment>

@@ -25,7 +25,7 @@ namespace Repository.Repositories
                 }
                     return staff;
             }
-            catch (Exception )
+            catch (Exception)
             {
                 throw;
             }            
@@ -115,13 +115,21 @@ namespace Repository.Repositories
                 using (var db = new CorridorDBEntities())
                 {
                     Staff staff = db.Staffs.Where(x => x.username == username).First();
+                    List<int> taskIdList = new List<int>();
                     foreach (Staff_Task sT in db.Staff_Task.Where(x => x.staffId == staff.staffId))
                     {
+                        taskIdList.Add(Convert.ToInt32(sT.taskId));
                         db.Staff_Task.Attach(sT);
-                        db.Staff_Task.Remove(sT);
-                        if (db.Staff_Task.Where(x => x.staffId == staff.staffId).Count() < 1)
+                        db.Staff_Task.Remove(sT);                        
+                    }
+
+                    db.SaveChanges();
+
+                    foreach (int id in taskIdList)
+                    {
+                        if (db.Staff_Task.Where(x => x.staffId == id).Count() < 1)
                         {
-                            Task task = db.Tasks.Where(x => x.taskId == sT.taskId).First();
+                            Task task = db.Tasks.Where(x => x.taskId == id).First();
                             db.Tasks.Attach(task);
                             db.Tasks.Remove(task);
                         }

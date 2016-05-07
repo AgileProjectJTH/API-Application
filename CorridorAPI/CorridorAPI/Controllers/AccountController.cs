@@ -43,7 +43,7 @@ namespace CorridorAPI.Controllers
             //Save Username i db as staff
             Repository.Repositories.UserRepository.Post(CustomMapper.MapTo.Staff(userModel));
             return Ok();
-        }
+        }        
 
         protected override void Dispose(bool disposing)
         {

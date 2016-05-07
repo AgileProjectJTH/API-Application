@@ -120,6 +120,7 @@ namespace Repository.Repositories
                 {
                     Corridor corridor = db.Corridors.Find(updatedCorridor.corridorId);
                     corridor.name = updatedCorridor.name;
+                    corridor.eventInfo = updatedCorridor.eventInfo;
                     db.SaveChanges();
                 }
             }

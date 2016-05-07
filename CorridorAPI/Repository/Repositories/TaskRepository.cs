@@ -41,8 +41,14 @@ namespace Repository.Repositories
                 {
                     Staff staff = db.Staffs.Where(x => x.username == username).First();
                     foreach (Task t in tasks)
+                    {                        
+                        db.Tasks.Add(t);                        
+                    }
+                    db.SaveChanges();
+                    Task task = tasks.ElementAtOrDefault(0);
+
+                    foreach (Task t in db.Tasks.Where(x => x.room == task.room))
                     {
-                        db.Tasks.Add(t);
                         db.Staff_Task.Add(new Staff_Task { staffId = staff.staffId, taskId = t.taskId });
                     }
                     
