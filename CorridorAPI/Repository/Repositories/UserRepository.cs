@@ -17,7 +17,9 @@ namespace Repository.Repositories
         {
             using (var db = new CorridorDBEntities())
             {
-                db.Staffs.Add(new Staff { username = staff.username, firstname = staff.firstname, lastname = staff.lastname, email = staff.email, isAdmin = staff.isAdmin, mobile = staff.mobile });
+                db.Staffs.Add(new Staff { username = staff.username, firstname = staff.firstname,
+                                          lastname = staff.lastname, email = staff.email,
+                                          isAdmin = staff.isAdmin, mobile = staff.mobile, roomNr = staff.roomNr });
                 db.SaveChanges();
             }
         }

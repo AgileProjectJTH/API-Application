@@ -22,7 +22,6 @@ namespace Repository
     
         public int corridorId { get; set; }
         public string name { get; set; }
-        public string evenInfo { get; set; }
         public string eventInfo { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

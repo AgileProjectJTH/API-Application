@@ -40,18 +40,13 @@ namespace Repository.Repositories
                 using (var db = new CorridorDBEntities())
                 {
                     Staff staff = db.Staffs.Where(x => x.username == username).First();
+                    List<int> idlist = new List<int>();
                     foreach (Task t in tasks)
                     {                        
-                        db.Tasks.Add(t);                        
-                    }
-                    db.SaveChanges();
-                    Task task = tasks.ElementAtOrDefault(0);
-
-                    foreach (Task t in db.Tasks.Where(x => x.room == task.room))
-                    {
+                        db.Tasks.Add(t);
+                        db.SaveChanges();
                         db.Staff_Task.Add(new Staff_Task { staffId = staff.staffId, taskId = t.taskId });
                     }
-                    
                     db.SaveChanges();
                 }
             }
@@ -66,13 +61,16 @@ namespace Repository.Repositories
         /// Adds a task
         /// </summary>
         /// <param name="task">task to add</param>
-        public static void Post(Task task)
+        public static void Post(Task task, string username)
         {
             try
             {
                 using (var db = new CorridorDBEntities())
                 {
+                    Staff staff = db.Staffs.Where(x => x.username == username).First();
                     db.Tasks.Add(task);
+                    db.SaveChanges();                    
+                    Staff_Task sT = new Staff_Task { staffId = staff.staffId, taskId = task.taskId};
                     db.SaveChanges();
                 }
             }

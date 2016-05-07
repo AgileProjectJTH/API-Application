@@ -118,6 +118,7 @@ namespace CorridorAPI.CustomMapper
             s.roomNr = userModel.roomNr;
             s.username = userModel.UserName;
             s.isAdmin = userModel.isAdmin;
+            s.roomNr = userModel.roomNr;
             return s;
         }
 

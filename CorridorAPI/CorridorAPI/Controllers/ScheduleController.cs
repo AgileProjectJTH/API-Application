@@ -28,32 +28,35 @@ namespace CorridorAPI.Controllers
                 
                 int numberOfDays = (Convert.ToInt32(Math.Floor(( DateTime.Parse(scheduleModel.toDateAndTime)  -  DateTime.Parse(scheduleModel.fromDateAndTime) ).TotalDays))+1);
 
-                //If more the one day
-                if (numberOfDays > 1)
+                //If more the one day but not more then 100
+                if (numberOfDays > 1 && numberOfDays < 100)
                 {
                     List<Schedule> schedules = new List<Schedule>();
                     DateTime startDay = DateTime.Parse(scheduleModel.fromDateAndTime);
                     for (int i = 0; i < numberOfDays; i++)
                     {
                         string date = startDay.AddDays(i).ToString().Substring(0, 10);
-                        schedules.Add(new Schedule(user.roomNr, date, "07-00", "17-00"));
+                        schedules.Add(new Schedule(scheduleModel.roomNr, date, "07-00", "17-00"));
                     }
-                    schedules.Add(new Schedule(user.roomNr, scheduleModel.toDateAndTime.Substring(0, 10), "07-00", scheduleModel.toDateAndTime.Substring(11, 5)));
+                    schedules.Add(new Schedule(scheduleModel.roomNr, scheduleModel.toDateAndTime.Substring(0, 10), "07-00", scheduleModel.toDateAndTime.Substring(11, 5)));
                     TaskRepository.Post(CustomMapper.MapTo.Task(schedules), authenticatedUser);
+
+                    return Ok();
                 }
 
                 //if only one day
-                else
+                else if(numberOfDays == 1)
                 {                    
                     string to = scheduleModel.toDateAndTime.Substring(11, 5);
                     string fromDate = scheduleModel.fromDateAndTime.Substring(0, 10);
                     string from = scheduleModel.fromDateAndTime.Substring(11, 5);
 
-                    Schedule schedule = new Schedule(user.roomNr, fromDate, from, to);
-                    TaskRepository.Post(CustomMapper.MapTo.Task(schedule));
+                    Schedule schedule = new Schedule(scheduleModel.roomNr, fromDate, from, to);
+                    TaskRepository.Post(CustomMapper.MapTo.Task(schedule), authenticatedUser);
+                    return Ok();
                 }
 
-                return Ok();
+                return BadRequest("Wrong input of date, numberOfDays may not be negative or larger then 100");
             }
             catch (Exception e)
             {
@@ -68,6 +71,8 @@ namespace CorridorAPI.Controllers
         [Authorize]
         public IHttpActionResult DELETE(string dateAndTime, string toDateAndTime)
         {
+
+            //BDO WE NEED IT???
             return null;
         }
 
