@@ -15,10 +15,15 @@ namespace Repository.Repositories
         /// <returns>a list of Tasks</returns>
         public static List<Task> List(string roomNr)
         {
-            List<Task> tasks;
+            List<Task> tasks = new List<Task>();
             using (var db = new CorridorDBEntities())
             {
-                tasks = db.Tasks.Where(x => x.room == roomNr).ToList();
+                Staff staff = db.Staffs.Where(x => x.roomNr == roomNr).First();
+                foreach (var sT in db.Staff_Task.Where(x => x.staffId == staff.staffId))
+                {
+                    tasks.Add(db.Tasks.Where(x => x.taskId == sT.taskId).First());
+                }
+                
             }
 
             return tasks;
@@ -28,13 +33,19 @@ namespace Repository.Repositories
         /// Adds a list of tasks
         /// </summary>
         /// <param name="tasks">Tasks to add</param>
-        public static void Post(List<Task> tasks)
+        public static void Post(List<Task> tasks, string username)
         {
             try
             {
                 using (var db = new CorridorDBEntities())
                 {
-                    db.Tasks.AddRange(tasks);
+                    Staff staff = db.Staffs.Where(x => x.username == username).First();
+                    foreach (Task t in tasks)
+                    {
+                        db.Tasks.Add(t);
+                        db.Staff_Task.Add(new Staff_Task { staffId = staff.staffId, taskId = t.taskId });
+                    }
+                    
                     db.SaveChanges();
                 }
             }

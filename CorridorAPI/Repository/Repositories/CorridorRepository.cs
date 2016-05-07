@@ -43,8 +43,8 @@ namespace Repository.Repositories
                 {
                     Staff staff = db.Staffs.Where(x => x.username == username).First();
                     Staff_Corridor sc = new Staff_Corridor { staffId = staff.staffId, corridorId = newCorridorId };
-                    //Staff staffs = db.Staffs.Find(newStaffId);
-                    //staffs.Staff_Corridor.Add(sc);
+                    Staff staffs = db.Staffs.Find(staff.staffId);
+                    staffs.Staff_Corridor.Add(sc);
                     db.Staff_Corridor.Add(sc);
                     db.SaveChanges();
                 }
@@ -57,17 +57,21 @@ namespace Repository.Repositories
         }
 
         /// <summary>
-        /// Removes user with staffId= newStaffId from corridro with corridorIt newCorridorId
+        /// Removes user with staffId= newStaffId from corridro with corridorIt username.corridorId
         /// </summary>
         /// <param name="newCorridorId"></param>
         /// <param name="newStaffId"></param>
-        public static void Delete(int newCorridorId, int newStaffId)
+        public static void Delete(int newCorridorId, string username)
         {
             try
             {
                 using (var db = new CorridorDBEntities())
                 {
-
+                    Staff staff = db.Staffs.Include("Staff_Task").Where(x => x.username == username).First();
+                    Staff_Corridor sC = db.Staff_Corridor.Find(staff.staffId);
+                    db.Staff_Corridor.Attach(sC);
+                    db.Staff_Corridor.Remove(sC);
+                    db.SaveChanges();
                 }
             }
             catch (Exception)
@@ -87,7 +91,12 @@ namespace Repository.Repositories
             {
                 using (var db = new CorridorDBEntities())
                 {
-                    Corridor corridor = db.Corridors.Find(corridorId);
+                    foreach (var sC in db.Staff_Corridor.Where(x => x.corridorId == corridorId))
+                    {
+                        db.Staff_Corridor.Attach(sC);
+                        db.Staff_Corridor.Remove(sC);
+                    }
+                    Corridor corridor = db.Corridors.Where(x => x.corridorId == corridorId).First();
                     db.Corridors.Attach(corridor);
                     db.Corridors.Remove(corridor);
                     db.SaveChanges();
@@ -95,6 +104,28 @@ namespace Repository.Repositories
             }
             catch (Exception)
             {
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// updates corridor name with it updatedcorridor.corridorId
+        /// </summary>
+        /// <param name="updatedCorridor"></param>
+        public static void Update(Corridor updatedCorridor)
+        {
+            try
+            {
+                using (var db = new CorridorDBEntities())
+                {
+                    Corridor corridor = db.Corridors.Find(updatedCorridor.corridorId);
+                    corridor.name = updatedCorridor.name;
+                    db.SaveChanges();
+                }
+            }
+            catch (Exception)
+            {
+
                 throw;
             }
         }

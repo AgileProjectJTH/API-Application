@@ -13,6 +13,7 @@ namespace CorridorAPI.Controllers
         /* POST: Api/Corridor            
          * Param: corridorName (string)
          * Create a new corridor */
+        [Authorize]
         public IHttpActionResult POST(string corridorName)
         {
             try
@@ -29,6 +30,7 @@ namespace CorridorAPI.Controllers
         /* POST: Api/Corridor            
          * Param: username (string) , corridorId (Int) 
          * Adds user with username = username to corridor with id corridorId */
+        [Authorize]
         public IHttpActionResult POST(string username, int corridorId)
         {
             try
@@ -45,10 +47,14 @@ namespace CorridorAPI.Controllers
         /* DELETE: Api/Corridor            
          * Param: corridorId (Int)
          * Removes corridor with Id = corridorId */
+        [Authorize]
         public IHttpActionResult DELETE(int corridorId)
         {
             try
             {
+                //--------------------------------
+                //DELETE ON CASCADE BEHÖVER IMPLEMENTERAS
+                //--------------------------------
                 Repository.Repositories.CorridorRepository.Delete(corridorId);
                 return Ok();
             }
@@ -61,10 +67,12 @@ namespace CorridorAPI.Controllers
         /* DELETE: Api/Corridor            
          * Param: username (string), corridorId (Int)
          * Removes user with username = username from corridor with Id = corridorId */
+        [Authorize]
         public IHttpActionResult DELETE(string username, int corridorId)
         {
             try
             {
+                Repository.Repositories.CorridorRepository.Delete(corridorId, username);
                 return Ok();
             }
             catch (Exception e)
@@ -76,10 +84,12 @@ namespace CorridorAPI.Controllers
         /* PUT: Api/Corridor            
          * Param: corridorModel (CorridorModel) 
          * Updates updates corridor with id = corridorModel.id with corridorname = corridorModel.name  */
+        [Authorize]
         public IHttpActionResult PUT(CorridorModel corridorModel)
         {
             try
             {
+                Repository.Repositories.CorridorRepository.Update(CustomMapper.MapTo.corridor(corridorModel));
                 return Ok();
             }
             catch (Exception e)
@@ -91,11 +101,13 @@ namespace CorridorAPI.Controllers
         /* GET: Api/Corridor            
          * Param:
          * Returns a list of all corridors  */
+        [Authorize]
         public IHttpActionResult GET()
         {
             try
             {
-                return Ok();
+                List<CorridorModel> corridorModel = CustomMapper.MapTo.corridorModel(Repository.Repositories.CorridorRepository.List());
+                return Json(corridorModel);
             }
             catch (Exception e)
             {

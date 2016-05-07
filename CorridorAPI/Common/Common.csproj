@@ -50,6 +50,7 @@
   <ItemGroup>
     <Compile Include="Models\CorridorModel.cs" />
     <Compile Include="Models\Schedule.cs" />
+    <Compile Include="Models\ScheduleModel.cs" />
     <Compile Include="Models\StaffModel.cs" />
     <Compile Include="Models\StaffModels.cs" />
     <Compile Include="Models\UserModel.cs" />

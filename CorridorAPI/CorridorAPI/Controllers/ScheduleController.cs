@@ -17,7 +17,7 @@ namespace CorridorAPI.Controllers
          * Param: Date need format yyyy-mm-dd hh:mm:ss
          * Set staff to unavaible */
         [Authorize]
-        public IHttpActionResult POST(string fromDateAndTime, string toDateAndTime)
+        public IHttpActionResult POST(ScheduleModel scheduleModel)
         {
             var identity = User.Identity as ClaimsIdentity;
             string authenticatedUser = identity.FindFirst("sub").Value;
@@ -26,28 +26,28 @@ namespace CorridorAPI.Controllers
             {
                 StaffModel user = CustomMapper.MapTo.StaffModel(Repository.Repositories.StaffRepository.Get(authenticatedUser));                
                 
-                int numberOfDays = (Convert.ToInt32(Math.Floor(( DateTime.Parse(toDateAndTime)  -  DateTime.Parse(fromDateAndTime) ).TotalDays))+1);
+                int numberOfDays = (Convert.ToInt32(Math.Floor(( DateTime.Parse(scheduleModel.toDateAndTime)  -  DateTime.Parse(scheduleModel.fromDateAndTime) ).TotalDays))+1);
 
                 //If more the one day
                 if (numberOfDays > 1)
                 {
                     List<Schedule> schedules = new List<Schedule>();
-                    DateTime startDay = DateTime.Parse(fromDateAndTime);
+                    DateTime startDay = DateTime.Parse(scheduleModel.fromDateAndTime);
                     for (int i = 0; i < numberOfDays; i++)
                     {
                         string date = startDay.AddDays(i).ToString().Substring(0, 10);
                         schedules.Add(new Schedule(user.roomNr, date, "07-00", "17-00"));
                     }
-                    schedules.Add(new Schedule(user.roomNr, toDateAndTime.Substring(0, 10), "07-00", toDateAndTime.Substring(11, 5)));
-                    TaskRepository.Post(CustomMapper.MapTo.Task(schedules));
+                    schedules.Add(new Schedule(user.roomNr, scheduleModel.toDateAndTime.Substring(0, 10), "07-00", scheduleModel.toDateAndTime.Substring(11, 5)));
+                    TaskRepository.Post(CustomMapper.MapTo.Task(schedules), authenticatedUser);
                 }
 
                 //if only one day
                 else
                 {                    
-                    string to = toDateAndTime.Substring(11, 5);
-                    string fromDate = fromDateAndTime.Substring(0, 10);
-                    string from = fromDateAndTime.Substring(11, 5);
+                    string to = scheduleModel.toDateAndTime.Substring(11, 5);
+                    string fromDate = scheduleModel.fromDateAndTime.Substring(0, 10);
+                    string from = scheduleModel.fromDateAndTime.Substring(11, 5);
 
                     Schedule schedule = new Schedule(user.roomNr, fromDate, from, to);
                     TaskRepository.Post(CustomMapper.MapTo.Task(schedule));

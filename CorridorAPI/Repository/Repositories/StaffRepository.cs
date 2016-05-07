@@ -115,6 +115,24 @@ namespace Repository.Repositories
                 using (var db = new CorridorDBEntities())
                 {
                     Staff staff = db.Staffs.Where(x => x.username == username).First();
+                    foreach (Staff_Task sT in db.Staff_Task.Where(x => x.staffId == staff.staffId))
+                    {
+                        db.Staff_Task.Attach(sT);
+                        db.Staff_Task.Remove(sT);
+                        if (db.Staff_Task.Where(x => x.staffId == staff.staffId).Count() < 1)
+                        {
+                            Task task = db.Tasks.Where(x => x.taskId == sT.taskId).First();
+                            db.Tasks.Attach(task);
+                            db.Tasks.Remove(task);
+                        }
+                    }
+
+                    foreach (Staff_Corridor sC in db.Staff_Corridor.Where(x => x.staffId == staff.staffId))
+                    {
+                        db.Staff_Corridor.Attach(sC);
+                        db.Staff_Corridor.Remove(sC);
+                    }
+
                     db.Staffs.Attach(staff);
                     db.Staffs.Remove(staff);
                     db.SaveChanges();
