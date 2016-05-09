@@ -1,0 +1,346 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="CorridorDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Corridor">
+          <Key>
+            <PropertyRef Name="corridorId" />
+          </Key>
+          <Property Name="corridorId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="50" />
+          <Property Name="eventInfo" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="Staff">
+          <Key>
+            <PropertyRef Name="staffId" />
+          </Key>
+          <Property Name="staffId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="firstname" Type="nvarchar" MaxLength="50" />
+          <Property Name="lastname" Type="nvarchar" MaxLength="50" />
+          <Property Name="email" Type="nvarchar" MaxLength="100" />
+          <Property Name="mobile" Type="nvarchar" MaxLength="30" />
+          <Property Name="isAdmin" Type="bit" />
+          <Property Name="username" Type="nvarchar" MaxLength="50" />
+          <Property Name="roomNr" Type="nvarchar" MaxLength="10" />
+          <Property Name="password" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Staff_Corridor">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="staffId" Type="int" />
+          <Property Name="corridorId" Type="int" />
+        </EntityType>
+        <EntityType Name="Staff_Task">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="staffId" Type="int" />
+          <Property Name="taskId" Type="int" />
+        </EntityType>
+        <EntityType Name="Task">
+          <Key>
+            <PropertyRef Name="taskId" />
+          </Key>
+          <Property Name="taskId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="room" Type="nvarchar" MaxLength="10" />
+          <Property Name="date" Type="nvarchar" MaxLength="10" />
+          <Property Name="fromTime" Type="nvarchar" MaxLength="10" />
+          <Property Name="toTime" Type="nvarchar" MaxLength="10" />
+          <Property Name="course" Type="nvarchar" MaxLength="100" />
+          <Property Name="moment" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <Association Name="FK__Staff_Cor__corri__15502E78">
+          <End Role="Corridor" Type="Self.Corridor" Multiplicity="0..1" />
+          <End Role="Staff_Corridor" Type="Self.Staff_Corridor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Corridor">
+              <PropertyRef Name="corridorId" />
+            </Principal>
+            <Dependent Role="Staff_Corridor">
+              <PropertyRef Name="corridorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Staff_Cor__staff__145C0A3F">
+          <End Role="Staff" Type="Self.Staff" Multiplicity="0..1" />
+          <End Role="Staff_Corridor" Type="Self.Staff_Corridor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Staff">
+              <PropertyRef Name="staffId" />
+            </Principal>
+            <Dependent Role="Staff_Corridor">
+              <PropertyRef Name="staffId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Staff_Tas__staff__1A14E395">
+          <End Role="Staff" Type="Self.Staff" Multiplicity="0..1" />
+          <End Role="Staff_Task" Type="Self.Staff_Task" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Staff">
+              <PropertyRef Name="staffId" />
+            </Principal>
+            <Dependent Role="Staff_Task">
+              <PropertyRef Name="staffId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Staff_Tas__taskI__1B0907CE">
+          <End Role="Task" Type="Self.Task" Multiplicity="0..1" />
+          <End Role="Staff_Task" Type="Self.Staff_Task" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Task">
+              <PropertyRef Name="taskId" />
+            </Principal>
+            <Dependent Role="Staff_Task">
+              <PropertyRef Name="taskId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="CorridorDBModelStoreContainer">
+          <EntitySet Name="Corridor" EntityType="Self.Corridor" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Staff" EntityType="Self.Staff" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Staff_Corridor" EntityType="Self.Staff_Corridor" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Staff_Task" EntityType="Self.Staff_Task" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Task" EntityType="Self.Task" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Staff_Cor__corri__15502E78" Association="Self.FK__Staff_Cor__corri__15502E78">
+            <End Role="Corridor" EntitySet="Corridor" />
+            <End Role="Staff_Corridor" EntitySet="Staff_Corridor" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Staff_Cor__staff__145C0A3F" Association="Self.FK__Staff_Cor__staff__145C0A3F">
+            <End Role="Staff" EntitySet="Staff" />
+            <End Role="Staff_Corridor" EntitySet="Staff_Corridor" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Staff_Tas__staff__1A14E395" Association="Self.FK__Staff_Tas__staff__1A14E395">
+            <End Role="Staff" EntitySet="Staff" />
+            <End Role="Staff_Task" EntitySet="Staff_Task" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Staff_Tas__taskI__1B0907CE" Association="Self.FK__Staff_Tas__taskI__1B0907CE">
+            <End Role="Task" EntitySet="Task" />
+            <End Role="Staff_Task" EntitySet="Staff_Task" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="CorridorDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Corridor">
+          <Key>
+            <PropertyRef Name="corridorId" />
+          </Key>
+          <Property Name="corridorId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Staff_Corridor" Relationship="Self.FK__Staff_Cor__corri__15502E78" FromRole="Corridor" ToRole="Staff_Corridor" />
+          <Property Name="eventInfo" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Staff">
+          <Key>
+            <PropertyRef Name="staffId" />
+          </Key>
+          <Property Name="staffId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="firstname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="lastname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="email" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="mobile" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="isAdmin" Type="Boolean" />
+          <NavigationProperty Name="Staff_Corridor" Relationship="Self.FK__Staff_Cor__staff__145C0A3F" FromRole="Staff" ToRole="Staff_Corridor" />
+          <NavigationProperty Name="Staff_Task" Relationship="Self.FK__Staff_Tas__staff__1A14E395" FromRole="Staff" ToRole="Staff_Task" />
+          <Property Name="username" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="roomNr" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Staff_Corridor">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="staffId" Type="Int32" />
+          <Property Name="corridorId" Type="Int32" />
+          <NavigationProperty Name="Corridor" Relationship="Self.FK__Staff_Cor__corri__15502E78" FromRole="Staff_Corridor" ToRole="Corridor" />
+          <NavigationProperty Name="Staff" Relationship="Self.FK__Staff_Cor__staff__145C0A3F" FromRole="Staff_Corridor" ToRole="Staff" />
+        </EntityType>
+        <EntityType Name="Staff_Task">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="staffId" Type="Int32" />
+          <Property Name="taskId" Type="Int32" />
+          <NavigationProperty Name="Staff" Relationship="Self.FK__Staff_Tas__staff__1A14E395" FromRole="Staff_Task" ToRole="Staff" />
+          <NavigationProperty Name="Task" Relationship="Self.FK__Staff_Tas__taskI__1B0907CE" FromRole="Staff_Task" ToRole="Task" />
+        </EntityType>
+        <EntityType Name="Task">
+          <Key>
+            <PropertyRef Name="taskId" />
+          </Key>
+          <Property Name="taskId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="room" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="date" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="fromTime" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="toTime" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="course" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="moment" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Staff_Task" Relationship="Self.FK__Staff_Tas__taskI__1B0907CE" FromRole="Task" ToRole="Staff_Task" />
+        </EntityType>
+        <Association Name="FK__Staff_Cor__corri__15502E78">
+          <End Role="Corridor" Type="Self.Corridor" Multiplicity="0..1" />
+          <End Role="Staff_Corridor" Type="Self.Staff_Corridor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Corridor">
+              <PropertyRef Name="corridorId" />
+            </Principal>
+            <Dependent Role="Staff_Corridor">
+              <PropertyRef Name="corridorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Staff_Cor__staff__145C0A3F">
+          <End Role="Staff" Type="Self.Staff" Multiplicity="0..1" />
+          <End Role="Staff_Corridor" Type="Self.Staff_Corridor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Staff">
+              <PropertyRef Name="staffId" />
+            </Principal>
+            <Dependent Role="Staff_Corridor">
+              <PropertyRef Name="staffId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Staff_Tas__staff__1A14E395">
+          <End Role="Staff" Type="Self.Staff" Multiplicity="0..1" />
+          <End Role="Staff_Task" Type="Self.Staff_Task" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Staff">
+              <PropertyRef Name="staffId" />
+            </Principal>
+            <Dependent Role="Staff_Task">
+              <PropertyRef Name="staffId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Staff_Tas__taskI__1B0907CE">
+          <End Role="Task" Type="Self.Task" Multiplicity="0..1" />
+          <End Role="Staff_Task" Type="Self.Staff_Task" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Task">
+              <PropertyRef Name="taskId" />
+            </Principal>
+            <Dependent Role="Staff_Task">
+              <PropertyRef Name="taskId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="CorridorDBEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Corridors" EntityType="Self.Corridor" />
+          <EntitySet Name="Staffs" EntityType="Self.Staff" />
+          <EntitySet Name="Staff_Corridor" EntityType="Self.Staff_Corridor" />
+          <EntitySet Name="Staff_Task" EntityType="Self.Staff_Task" />
+          <EntitySet Name="Tasks" EntityType="Self.Task" />
+          <AssociationSet Name="FK__Staff_Cor__corri__15502E78" Association="Self.FK__Staff_Cor__corri__15502E78">
+            <End Role="Corridor" EntitySet="Corridors" />
+            <End Role="Staff_Corridor" EntitySet="Staff_Corridor" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Staff_Cor__staff__145C0A3F" Association="Self.FK__Staff_Cor__staff__145C0A3F">
+            <End Role="Staff" EntitySet="Staffs" />
+            <End Role="Staff_Corridor" EntitySet="Staff_Corridor" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Staff_Tas__staff__1A14E395" Association="Self.FK__Staff_Tas__staff__1A14E395">
+            <End Role="Staff" EntitySet="Staffs" />
+            <End Role="Staff_Task" EntitySet="Staff_Task" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Staff_Tas__taskI__1B0907CE" Association="Self.FK__Staff_Tas__taskI__1B0907CE">
+            <End Role="Task" EntitySet="Tasks" />
+            <End Role="Staff_Task" EntitySet="Staff_Task" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="CorridorDBModelStoreContainer" CdmEntityContainer="CorridorDBEntities">
+          <EntitySetMapping Name="Corridors">
+            <EntityTypeMapping TypeName="CorridorDBModel.Corridor">
+              <MappingFragment StoreEntitySet="Corridor">
+                <ScalarProperty Name="eventInfo" ColumnName="eventInfo" />
+                <ScalarProperty Name="corridorId" ColumnName="corridorId" />
+                <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Staffs">
+            <EntityTypeMapping TypeName="CorridorDBModel.Staff">
+              <MappingFragment StoreEntitySet="Staff">
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="roomNr" ColumnName="roomNr" />
+                <ScalarProperty Name="username" ColumnName="username" />
+                <ScalarProperty Name="staffId" ColumnName="staffId" />
+                <ScalarProperty Name="firstname" ColumnName="firstname" />
+                <ScalarProperty Name="lastname" ColumnName="lastname" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="mobile" ColumnName="mobile" />
+                <ScalarProperty Name="isAdmin" ColumnName="isAdmin" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Staff_Corridor">
+            <EntityTypeMapping TypeName="CorridorDBModel.Staff_Corridor">
+              <MappingFragment StoreEntitySet="Staff_Corridor">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="staffId" ColumnName="staffId" />
+                <ScalarProperty Name="corridorId" ColumnName="corridorId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Staff_Task">
+            <EntityTypeMapping TypeName="CorridorDBModel.Staff_Task">
+              <MappingFragment StoreEntitySet="Staff_Task">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="staffId" ColumnName="staffId" />
+                <ScalarProperty Name="taskId" ColumnName="taskId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tasks">
+            <EntityTypeMapping TypeName="CorridorDBModel.Task">
+              <MappingFragment StoreEntitySet="Task">
+                <ScalarProperty Name="taskId" ColumnName="taskId" />
+                <ScalarProperty Name="room" ColumnName="room" />
+                <ScalarProperty Name="date" ColumnName="date" />
+                <ScalarProperty Name="fromTime" ColumnName="fromTime" />
+                <ScalarProperty Name="toTime" ColumnName="toTime" />
+                <ScalarProperty Name="course" ColumnName="course" />
+                <ScalarProperty Name="moment" ColumnName="moment" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
