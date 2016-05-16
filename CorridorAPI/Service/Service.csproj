@@ -40,6 +40,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Interface\ICorridorServices.cs" />
+    <Compile Include="Interface\IScheduleServices.cs" />
     <Compile Include="Interface\IStaffServices.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

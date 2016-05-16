@@ -9,7 +9,7 @@ namespace Repository.Repositories
     public class TaskRepository
     {
         /// <summary>
-        /// Returns a list of task for a specific staff with the roomNr
+        /// Returns a list of task for a specific staff with the roomNr = roomNr
         /// </summary>
         /// <param name="roomNr">Number of staffs room</param>
         /// <returns>a list of Tasks</returns>
