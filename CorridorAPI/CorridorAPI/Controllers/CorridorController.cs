@@ -5,20 +5,31 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using Service.Interface;
+using Service.Services;
+using System.Security.Claims;
 
 namespace CorridorAPI.Controllers
 {
     public class CorridorController : ApiController
     {
+        ICorridorServices _corridorServices;
+        public CorridorController()
+        {
+            _corridorServices = new CorridorServices();
+        }
         /* POST: Api/Corridor            
          * Param: corridorName (string)
          * Create a new corridor */
         [Authorize]
         public IHttpActionResult POST(string corridorName)
         {
+            var identity = User.Identity as ClaimsIdentity;
+            string authenticatedUser = identity.FindFirst("sub").Value;
+
             try
             {
-                Repository.Repositories.CorridorRepository.Post(corridorName);
+                _corridorServices.Post(corridorName);
                 return Ok();
             }
             catch (Exception e)
@@ -33,9 +44,12 @@ namespace CorridorAPI.Controllers
         [Authorize]
         public IHttpActionResult POST(string username, int corridorId)
         {
+            var identity = User.Identity as ClaimsIdentity;
+            string authenticatedUser = identity.FindFirst("sub").Value;
+
             try
             {
-                Repository.Repositories.CorridorRepository.Post(corridorId, username);
+                _corridorServices.Post(corridorId, username);
                 return Ok();
             }
             catch (Exception e)
@@ -50,12 +64,11 @@ namespace CorridorAPI.Controllers
         [Authorize]
         public IHttpActionResult DELETE(int corridorId)
         {
+            var identity = User.Identity as ClaimsIdentity;
+            string authenticatedUser = identity.FindFirst("sub").Value;
             try
             {
-                //--------------------------------
-                //DELETE ON CASCADE BEHÖVER IMPLEMENTERAS
-                //--------------------------------
-                Repository.Repositories.CorridorRepository.Delete(corridorId);
+                _corridorServices.Delete(corridorId);
                 return Ok();
             }
             catch (Exception e)
@@ -70,9 +83,11 @@ namespace CorridorAPI.Controllers
         [Authorize]
         public IHttpActionResult DELETE(string username, int corridorId)
         {
+            var identity = User.Identity as ClaimsIdentity;
+            string authenticatedUser = identity.FindFirst("sub").Value;
             try
             {
-                Repository.Repositories.CorridorRepository.Delete(corridorId, username);
+                _corridorServices.Delete(corridorId, username);
                 return Ok();
             }
             catch (Exception e)
@@ -87,9 +102,11 @@ namespace CorridorAPI.Controllers
         [Authorize]
         public IHttpActionResult PUT(CorridorModel corridorModel)
         {
+            var identity = User.Identity as ClaimsIdentity;
+            string authenticatedUser = identity.FindFirst("sub").Value;
             try
             {
-                Repository.Repositories.CorridorRepository.Update(CustomMapper.MapTo.corridor(corridorModel));
+                _corridorServices.Update(corridorModel);
                 return Ok();
             }
             catch (Exception e)
@@ -104,9 +121,11 @@ namespace CorridorAPI.Controllers
         [Authorize]
         public IHttpActionResult GET()
         {
+            var identity = User.Identity as ClaimsIdentity;
+            string authenticatedUser = identity.FindFirst("sub").Value;
             try
             {
-                List<CorridorModel> corridorModel = CustomMapper.MapTo.corridorModel(Repository.Repositories.CorridorRepository.List());
+                List<CorridorModel> corridorModel = _corridorServices.List();
                 return Json(corridorModel);
             }
             catch (Exception e)

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Repository.Interface;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,13 +7,13 @@ using System.Threading.Tasks;
 
 namespace Repository.Repositories
 {
-    public class CorridorRepository
+    public class CorridorRepository: ICorridorRepository
     {
         /// <summary>
         /// adds a new corridor to database with name = corridorName
         /// </summary>
         /// <param name="corridorName"></param>
-        public static void Post(string corridorName)
+        public void Post(string corridorName)
         {
             try
             {
@@ -35,7 +36,7 @@ namespace Repository.Repositories
         /// </summary>
         /// <param name="newCorridorId"></param>
         /// <param name="newStaffId"></param>
-        public static void Post(int newCorridorId, string username)
+        public void Post(int newCorridorId, string username)
         {
             try
             {
@@ -61,7 +62,7 @@ namespace Repository.Repositories
         /// </summary>
         /// <param name="newCorridorId"></param>
         /// <param name="newStaffId"></param>
-        public static void Delete(int newCorridorId, string username)
+        public void Delete(int newCorridorId, string username)
         {
             try
             {
@@ -85,7 +86,7 @@ namespace Repository.Repositories
         /// removes corridor with corridorId = corridorId
         /// </summary>
         /// <param name="corridorId"></param>
-        public static void Delete(int corridorId)
+        public void Delete(int corridorId)
         {
             try
             {
@@ -112,7 +113,7 @@ namespace Repository.Repositories
         /// updates corridor name with it updatedcorridor.corridorId
         /// </summary>
         /// <param name="updatedCorridor"></param>
-        public static void Update(Corridor updatedCorridor)
+        public void Update(Corridor updatedCorridor)
         {
             try
             {
@@ -135,7 +136,7 @@ namespace Repository.Repositories
         /// returns a list of all corridors
         /// </summary>
         /// <returns>returns a list of all corridors</returns>
-        public static List<Corridor> List()
+        public List<Corridor> List()
         {
             try
             {
