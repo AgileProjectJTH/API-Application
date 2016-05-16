@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Repository.Interface
 {
-    interface IStaffRepository
+    public interface IStaffRepository
     {
         /// <summary>
         /// returns a staff with staffId = staffId

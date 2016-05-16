@@ -80,6 +80,7 @@
     </Compile>
     <Compile Include="Interface\ICorridorRepository.cs" />
     <Compile Include="Interface\IStaffRepository.cs" />
+    <Compile Include="Interface\ITaskRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\CorridorRepository.cs" />
     <Compile Include="Repositories\StaffRepository.cs" />
