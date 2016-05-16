@@ -1,5 +1,4 @@
 ﻿using Common.Models;
-using CorridorAPI.Models;
 using Microsoft.AspNet.Identity;
 using Service.Interface;
 using Service.Services;

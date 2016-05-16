@@ -2,14 +2,9 @@
 using System.Collections.Generic;
 using System.Web.Http;
 using System.Security.Claims;
-
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-
 using Repository.Repositories;
-
 using Common.Models;
-
-using CorridorAPI.Models;
 using CorridorAPI.Controllers;
 using System.Web.Http.Batch;
 using System.Net.Http;

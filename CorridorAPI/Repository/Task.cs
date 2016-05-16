@@ -27,6 +27,7 @@ namespace Repository
         public string toTime { get; set; }
         public string course { get; set; }
         public string moment { get; set; }
+        public Nullable<bool> isAailable { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Staff_Task> Staff_Task { get; set; }

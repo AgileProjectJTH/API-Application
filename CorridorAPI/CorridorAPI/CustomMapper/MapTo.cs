@@ -1,5 +1,4 @@
 ﻿using Common.Models;
-using CorridorAPI.Models;
 using Repository;
 using System;
 using System.Collections.Generic;

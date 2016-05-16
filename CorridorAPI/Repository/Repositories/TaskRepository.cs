@@ -3,17 +3,18 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Repository.Interface;
 
 namespace Repository.Repositories
 {
-    public class TaskRepository
+    public class TaskRepository: ITaskRepository
     {
         /// <summary>
         /// Returns a list of task for a specific staff with the roomNr = roomNr
         /// </summary>
         /// <param name="roomNr">Number of staffs room</param>
         /// <returns>a list of Tasks</returns>
-        public static List<Task> List(string roomNr)
+        public List<Task> List(string roomNr)
         {
             List<Task> tasks = new List<Task>();
             using (var db = new CorridorDBEntities())
@@ -33,7 +34,7 @@ namespace Repository.Repositories
         /// Adds a list of tasks
         /// </summary>
         /// <param name="tasks">Tasks to add</param>
-        public static void Post(List<Task> tasks, string username)
+        public void Post(List<Task> tasks, string username)
         {
             try
             {
@@ -61,7 +62,7 @@ namespace Repository.Repositories
         /// Adds a task
         /// </summary>
         /// <param name="task">task to add</param>
-        public static void Post(Task task, string username)
+        public void Post(Task task, string username)
         {
             try
             {

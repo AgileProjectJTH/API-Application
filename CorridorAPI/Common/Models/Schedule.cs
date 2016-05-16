@@ -30,5 +30,6 @@ namespace Common.Models
         public string signatures { get; set; }
         public string course { get; set; }
         public string moment { get; set; }
+        public bool isAvailable { get; set; }
     }
 }

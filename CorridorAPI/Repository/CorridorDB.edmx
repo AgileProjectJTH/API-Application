@@ -54,6 +54,7 @@
           <Property Name="toTime" Type="nvarchar" MaxLength="10" />
           <Property Name="course" Type="nvarchar" MaxLength="100" />
           <Property Name="moment" Type="nvarchar" MaxLength="100" />
+          <Property Name="isAailable" Type="bit" />
         </EntityType>
         <Association Name="FK__Staff_Cor__corri__15502E78">
           <End Role="Corridor" Type="Self.Corridor" Multiplicity="0..1" />
@@ -187,6 +188,7 @@
           <Property Name="course" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="moment" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Staff_Task" Relationship="Self.FK__Staff_Tas__taskI__1B0907CE" FromRole="Task" ToRole="Staff_Task" />
+          <Property Name="isAailable" Type="Boolean" />
         </EntityType>
         <Association Name="FK__Staff_Cor__corri__15502E78">
           <End Role="Corridor" Type="Self.Corridor" Multiplicity="0..1" />
@@ -310,6 +312,7 @@
           <EntitySetMapping Name="Tasks">
             <EntityTypeMapping TypeName="CorridorDBModel.Task">
               <MappingFragment StoreEntitySet="Task">
+                <ScalarProperty Name="isAailable" ColumnName="isAailable" />
                 <ScalarProperty Name="taskId" ColumnName="taskId" />
                 <ScalarProperty Name="room" ColumnName="room" />
                 <ScalarProperty Name="date" ColumnName="date" />

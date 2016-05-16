@@ -10,6 +10,13 @@ namespace Service.Interface
     public interface IScheduleServices
     {
         /// <summary>
+        /// Returns users avaibility
+        /// </summary>
+        /// <param name="dateAndTime"></param>
+        /// <returns></returns>
+        bool Get(string dateAndTime, string username);
+
+        /// <summary>
         /// Returns a list of Schedules for a specific staff with the roomNr = roomNr
         /// </summary>
         /// <param name="roomNr">Number of staffs room</param>
@@ -21,7 +28,7 @@ namespace Service.Interface
         /// </summary>
         /// <param name="lSchedule">Tasks to add</param>
         /// <param name="username"></param>
-        void Post(List<Schedule> lSchedule, string username);
+        string Post(ScheduleModel scheduleModel, string username);
 
         /// <summary>
         /// Adds a Schedule
