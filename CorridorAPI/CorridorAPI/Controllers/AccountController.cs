@@ -1,6 +1,8 @@
 ﻿using Common.Models;
 using CorridorAPI.Models;
 using Microsoft.AspNet.Identity;
+using Service.Interface;
+using Service.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,10 +17,12 @@ namespace CorridorAPI.Controllers
     public class AccountController : ApiController
     {
         private AuthRepository _repo = null;
+        private IUserServices _userServices;
 
         public AccountController()
         {
             _repo = new AuthRepository();
+            _userServices = new UserServices();
         }
 
         // POST api/Account/Register
@@ -41,7 +45,7 @@ namespace CorridorAPI.Controllers
             }
 
             //Save Username i db as staff
-            Repository.Repositories.UserRepository.Post(CustomMapper.MapTo.Staff(userModel));
+            _userServices.Post(userModel);
             return Ok();
         }        
 

@@ -13,6 +13,6 @@ namespace Service.Interface
         /// Adds a new user
         /// </summary>
         /// <param name="staff"></param>
-        void Post(StaffModel staff);
+        void Post(UserModel staff);
     }
 }

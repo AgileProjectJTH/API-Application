@@ -21,17 +21,17 @@ namespace Common.Models
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Firstname is Required")]
         public string firstname { get; set; }
-        [Required]
+        [Required(ErrorMessage = "Lastname is Required")]
         public string lastname { get; set; }
-        [Required]
+        [Required(ErrorMessage = "Email is Required")]
         public string email { get; set; }
-        [Required]
+        [Required(ErrorMessage = "Mobile Number is Required")]
         public string mobile { get; set; }
-        [Required]
+        [Required(ErrorMessage = "IsAdmin is Required")]
         public bool isAdmin { get; set; }
-        [Required]
+        [Required(ErrorMessage = "Room Number is Required")]
         public string roomNr { get; set; }
     }
 }

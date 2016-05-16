@@ -1,4 +1,5 @@
 ﻿using Common.Models;
+using Repository.Interface;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,13 +8,13 @@ using System.Threading.Tasks;
 
 namespace Repository.Repositories
 {
-    public class UserRepository
+    public class UserRepository: IUserRepository
     {
         /// <summary>
         /// Adds a new user
         /// </summary>
         /// <param name="user"></param>
-        public static void Post(Staff staff)
+        public void Post(Staff staff)
         {
             using (var db = new CorridorDBEntities())
             {
