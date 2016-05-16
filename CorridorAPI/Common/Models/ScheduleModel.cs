@@ -11,11 +11,11 @@ namespace Common.Models
     {
         [Required]
         public string fromDateAndTime { get; set; }
-        [Required]
-        public string toDateAndTime { get; set; }
+        public string toDateAndTime { get; set; } //if null API sets time for you
         //roomnumber were staff will be
-        public string roomNr { get; set; }
-        public string course { get; set; }
-        public string scheduleInfo { get; set; }
+        public string roomNr { get; set; } //null from apps
+        public string course { get; set; } //null from apps
+        public string scheduleInfo { get; set; } //null from apps
+        public bool available { get; set; }//True if you want to create a schedule that keeps you avaiable
     }
 }

@@ -24,8 +24,33 @@ namespace CorridorAPI.Controllers
 
             try
             {
-                StaffModel user = CustomMapper.MapTo.StaffModel(Repository.Repositories.StaffRepository.Get(authenticatedUser));                
-                
+                StaffModel user = CustomMapper.MapTo.StaffModel(Repository.Repositories.StaffRepository.Get(authenticatedUser));
+
+                if (scheduleModel.toDateAndTime == null)
+                {
+                    List<Schedule> lSchedule = CustomMapper.MapTo.Schedules(Repository.Repositories.TaskRepository.List(user.roomNr)).OrderBy(x=> x.from).ToList();
+                    if (lSchedule.Count != 0)
+                    {
+                        foreach (Schedule s in lSchedule)
+                        {
+                            if (Convert.ToInt32(scheduleModel.fromDateAndTime.Substring(12, 2)) < Convert.ToInt32(s.from.Substring(12, 2)))
+                            {
+                                if (scheduleModel.toDateAndTime == null)
+                                {
+                                    scheduleModel.toDateAndTime = s.from;
+                                }
+                                else if (Convert.ToInt32(scheduleModel.toDateAndTime.Substring(12, 2)) > Convert.ToInt32(s.from.Substring(12, 2)))
+                                {
+                                    scheduleModel.toDateAndTime = s.from;
+                                }
+                            }
+                        }
+                    }
+                    else
+                    {
+                        scheduleModel.toDateAndTime = scheduleModel.fromDateAndTime.Substring(0, 11) + "17:00:00";
+                    }
+                }
                 int numberOfDays = (Convert.ToInt32(Math.Floor(( DateTime.Parse(scheduleModel.toDateAndTime)  -  DateTime.Parse(scheduleModel.fromDateAndTime) ).TotalDays))+1);
 
                 //If more the one day but not more then 100
@@ -52,11 +77,20 @@ namespace CorridorAPI.Controllers
                     string from = scheduleModel.fromDateAndTime.Substring(11, 5);
 
                     Schedule schedule = new Schedule(scheduleModel.roomNr, fromDate, from, to);
+                    if (scheduleModel.scheduleInfo != null)
+                    {
+                        schedule.moment = scheduleModel.scheduleInfo;
+                    }
+                    if (scheduleModel.course != null)
+                    {
+                        schedule.course = scheduleModel.course;
+                    }
                     TaskRepository.Post(CustomMapper.MapTo.Task(schedule), authenticatedUser);
                     return Ok();
                 }
 
                 return BadRequest("Wrong input of date, numberOfDays may not be negative or larger then 100");
+
             }
             catch (Exception e)
             {

@@ -71,6 +71,7 @@ namespace Repository.Repositories
                     db.Tasks.Add(task);
                     db.SaveChanges();                    
                     Staff_Task sT = new Staff_Task { staffId = staff.staffId, taskId = task.taskId};
+                    db.Staff_Task.Add(sT);
                     db.SaveChanges();
                 }
             }
