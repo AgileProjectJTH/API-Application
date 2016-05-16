@@ -1,4 +1,5 @@
 ﻿using Common.Models;
+using Repository.Interface;
 using Repository.Repositories;
 using Service.Interface;
 using Service.Services;
@@ -14,11 +15,13 @@ namespace CorridorAPI.Controllers
 {
     public class ScheduleController : ApiController
     {
-
+        IKronox _kronox;
         IStaffServices _staffServices;
         IScheduleServices _scheduleServices;
+
         public ScheduleController()
         {
+            _kronox = new kronox();
             _staffServices = new StaffServices();
             _scheduleServices = new ScheduleServices();
         }
@@ -89,7 +92,7 @@ namespace CorridorAPI.Controllers
             {
                 StaffModel user = _staffServices.Get(authenticatedUser);               
                 string date = dateAndTime.Substring(0, 10);
-                StaffModels staffs = new StaffModels(kronox.getSchedule(user.roomNr, date));
+                StaffModels staffs = new StaffModels(_kronox.getSchedule(user.roomNr, date));
                 StaffModel staff = _staffServices.Get(user.staffId);
                 staff.schedules.AddRange(_scheduleServices.List(user.roomNr));
                 staffs.staffModels.Add(staff);

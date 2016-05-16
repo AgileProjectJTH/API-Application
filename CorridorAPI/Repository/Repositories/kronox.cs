@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Repository.Interface;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -8,7 +9,7 @@ using System.Web;
 
 namespace Repository.Repositories
 {
-    public class kronox
+    public class kronox: IKronox
     {
         /// <summary>
         /// GET
@@ -16,7 +17,7 @@ namespace Repository.Repositories
         /// <param name="roomNr">number of staffs room ex E2420</param>
         /// <param name="date">Date of witch day to get schedule, yyyy-mm-dd ex 2016-04-25</param>
         /// <returns>Returns a json object with the schedule for the staff with the roomNr and Date (date may be null)</returns>
-        public static string getSchedule(string roomNr, string date)
+        public string getSchedule(string roomNr, string date)
         {
             using (var client = new HttpClient())
             {

@@ -12,6 +12,7 @@ namespace Service.Services
 {
     public class ScheduleServices : IScheduleServices
     {
+        IKronox _kronox;
         ITaskRepository _taskRepository;
         IStaffServices _staffServices;
 
@@ -19,6 +20,7 @@ namespace Service.Services
         {
             _staffServices = new StaffServices();
             _taskRepository = new TaskRepository();
+            _kronox = new kronox();
         }
 
         /// <summary>
@@ -30,8 +32,6 @@ namespace Service.Services
         {
             try
             {
-
-
                 string date = dateAndTime.Substring(0, 10);
                 string time = dateAndTime.Substring(11, 5);
                 bool isAvailable = true;
@@ -60,7 +60,7 @@ namespace Service.Services
                 }
 
                 //checks with kronox schedule if current user is available or not   
-                StaffModels staffmodels = new StaffModels(kronox.getSchedule(user.roomNr, date));
+                StaffModels staffmodels = new StaffModels(_kronox.getSchedule(user.roomNr, date));
 
                 for (int i = 0; i < staffmodels.staffModels.Count; i++)
                 {

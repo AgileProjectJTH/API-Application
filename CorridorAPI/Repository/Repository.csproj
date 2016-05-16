@@ -79,6 +79,7 @@
       <DependentUpon>CorridorDB.edmx</DependentUpon>
     </Compile>
     <Compile Include="Interface\ICorridorRepository.cs" />
+    <Compile Include="Interface\IKronox.cs" />
     <Compile Include="Interface\IStaffRepository.cs" />
     <Compile Include="Interface\ITaskRepository.cs" />
     <Compile Include="Interface\IUserRepository.cs" />
