@@ -28,16 +28,22 @@ namespace CorridorAPI.Controllers
 
             try
             {
-                StaffModels staffs = new StaffModels();
-                staffs.staffModels = _staffServices.List();
-                return Json(staffs);
+                StaffModel user = _staffServices.Get(authenticatedUser);
+                if (user.isAdmin)
+                {
+                    StaffModels staffs = new StaffModels();
+                    staffs.staffModels = _staffServices.List();
+                    return Json(staffs);
+                }
+                return BadRequest("Permission denied");
+
             }
             catch (Exception e)
             {
 
                 return BadRequest(e.Message);
             }
-            
+
         }
 
         /* GET: Api/User
@@ -50,9 +56,15 @@ namespace CorridorAPI.Controllers
 
             try
             {
-                StaffModels staffs = new StaffModels();
-                staffs.staffModels = _staffServices.List(corridorNr); 
-                return Json(staffs);
+                StaffModel user = _staffServices.Get(authenticatedUser);
+                if (user.isAdmin)
+                {
+                    StaffModels staffs = new StaffModels();
+                    staffs.staffModels = _staffServices.List(corridorNr);
+                    return Json(staffs);
+                }
+                return BadRequest("Permission denied");
+
             }
             catch (Exception e)
             {
@@ -85,7 +97,7 @@ namespace CorridorAPI.Controllers
 
                 return BadRequest(e.Message);
             }
-            
+
         }
 
         /* DELETE: Api/User
@@ -103,10 +115,16 @@ namespace CorridorAPI.Controllers
 
             try
             {
-                _staffServices.Delete(username);
-                AuthRepository _repo = new AuthRepository();
-                _repo.Delete(username);
-                return Ok("User Deleted");
+                StaffModel user = _staffServices.Get(authenticatedUser);
+                if (user.isAdmin)
+                {
+                    _staffServices.Delete(username);
+                    AuthRepository _repo = new AuthRepository();
+                    _repo.Delete(username);
+                    return Ok("User Deleted");
+                }
+                return BadRequest("Permission denied");
+
             }
             catch (Exception e)
             {

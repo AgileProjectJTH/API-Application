@@ -14,9 +14,11 @@ namespace CorridorAPI.Controllers
     public class CorridorController : ApiController
     {
         ICorridorServices _corridorServices;
+        IStaffServices _staffServices;
         public CorridorController()
         {
             _corridorServices = new CorridorServices();
+            _staffServices = new StaffServices();
         }
         /* POST: Api/Corridor            
          * Param: corridorName (string)
@@ -26,11 +28,15 @@ namespace CorridorAPI.Controllers
         {
             var identity = User.Identity as ClaimsIdentity;
             string authenticatedUser = identity.FindFirst("sub").Value;
-
             try
             {
-                _corridorServices.Post(corridorName);
-                return Ok();
+                StaffModel user = _staffServices.Get(authenticatedUser);
+                if (user.isAdmin)
+                {
+                    _corridorServices.Post(corridorName);
+                    return Ok();
+                }
+                return BadRequest("Permission denied");
             }
             catch (Exception e)
             {
@@ -49,8 +55,13 @@ namespace CorridorAPI.Controllers
 
             try
             {
-                _corridorServices.Post(corridorId, username);
-                return Ok();
+                StaffModel user = _staffServices.Get(authenticatedUser);
+                if (user.isAdmin)
+                {
+                    _corridorServices.Post(corridorId, username);
+                    return Ok();
+                }
+                return BadRequest("Permission denied");
             }
             catch (Exception e)
             {
@@ -68,8 +79,14 @@ namespace CorridorAPI.Controllers
             string authenticatedUser = identity.FindFirst("sub").Value;
             try
             {
-                _corridorServices.Delete(corridorId);
-                return Ok();
+                StaffModel user = _staffServices.Get(authenticatedUser);
+                if (user.isAdmin)
+                {
+                    _corridorServices.Delete(corridorId);
+                    return Ok();
+                }
+                return BadRequest("Permission denied");
+
             }
             catch (Exception e)
             {
@@ -87,8 +104,14 @@ namespace CorridorAPI.Controllers
             string authenticatedUser = identity.FindFirst("sub").Value;
             try
             {
-                _corridorServices.Delete(corridorId, username);
-                return Ok();
+                StaffModel user = _staffServices.Get(authenticatedUser);
+                if (user.isAdmin)
+                {
+                    _corridorServices.Delete(corridorId, username);
+                    return Ok();
+                }
+                return BadRequest("Permission denied");
+
             }
             catch (Exception e)
             {
@@ -106,8 +129,14 @@ namespace CorridorAPI.Controllers
             string authenticatedUser = identity.FindFirst("sub").Value;
             try
             {
-                _corridorServices.Update(corridorModel);
-                return Ok();
+                StaffModel user = _staffServices.Get(authenticatedUser);
+                if (user.isAdmin)
+                {
+                    _corridorServices.Update(corridorModel);
+                    return Ok();
+                }
+                return BadRequest("Permission denied");
+
             }
             catch (Exception e)
             {
@@ -125,8 +154,14 @@ namespace CorridorAPI.Controllers
             string authenticatedUser = identity.FindFirst("sub").Value;
             try
             {
-                List<CorridorModel> corridorModel = _corridorServices.List();
-                return Json(corridorModel);
+                StaffModel user = _staffServices.Get(authenticatedUser);
+                if (user.isAdmin)
+                {
+                    List<CorridorModel> corridorModel = _corridorServices.List();
+                    return Json(corridorModel);
+                }
+                return BadRequest("Permission denied");
+
             }
             catch (Exception e)
             {

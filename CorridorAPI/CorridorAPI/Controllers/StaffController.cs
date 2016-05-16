@@ -25,7 +25,7 @@ namespace CorridorAPI.Controllers
 
         /* GET: Api/Staff
          * Param: Date need format yyyy-mm-dd hh:mm:ss
-           Returns: Returns bool True if staff is avaible */
+           Returns: Returns bool True if staff is available */
         [Authorize]
         public IHttpActionResult GET(string dateAndTime)
         {
@@ -40,7 +40,7 @@ namespace CorridorAPI.Controllers
 
             try
             {
-                return Ok(_scheduleServices.Get(dateAndTime, authenticatedUser));                
+                return Ok(_scheduleServices.Get(dateAndTime, authenticatedUser));
             }
 
             catch (Exception e)

@@ -51,10 +51,6 @@ namespace CorridorAPI.Controllers
                 {
                     return BadRequest(response);
                 }
-               
-                
-
-
             }
             catch (Exception e)
             {
@@ -90,7 +86,7 @@ namespace CorridorAPI.Controllers
 
             try
             {
-                StaffModel user = _staffServices.Get(authenticatedUser);               
+                StaffModel user = _staffServices.Get(authenticatedUser);
                 string date = dateAndTime.Substring(0, 10);
                 StaffModels staffs = new StaffModels(_kronox.getSchedule(user.roomNr, date));
                 StaffModel staff = _staffServices.Get(user.staffId);
