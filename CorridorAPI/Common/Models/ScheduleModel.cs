@@ -16,6 +16,7 @@ namespace Common.Models
         public string roomNr { get; set; } //null from apps
         public string course { get; set; } //null from apps
         public string scheduleInfo { get; set; } //null from apps
+        [Required]
         public bool available { get; set; }//True if you want to create a schedule that keeps you avaiable
     }
 }

@@ -23,6 +23,7 @@ namespace Service.CustomMapper
             schedule.to = task.toTime;
             schedule.moment = task.moment;
             schedule.room = task.room;
+            schedule.isAvailable = Convert.ToBoolean(task.isAailable);
             return schedule;
         }
 
@@ -68,6 +69,7 @@ namespace Service.CustomMapper
             t.fromTime = schedule.from;
             t.toTime = schedule.to;
             t.room = schedule.room;
+            t.isAailable = schedule.isAvailable;
             if (schedule.moment != null)
             {
                 t.moment = schedule.moment;
@@ -87,16 +89,14 @@ namespace Service.CustomMapper
         internal static StaffModel StaffModel(Repository.Staff staff)
         {
             StaffModel staffModel = new StaffModel();
+            staffModel.staffId = staff.staffId;
             staffModel.username = staff.username;
             staffModel.firstname = staff.firstname;
             staffModel.lastname = staff.lastname;
             staffModel.email = staff.email;
             staffModel.mobile = staff.mobile;
             staffModel.staffId = staff.staffId;
-            if (staff.roomNr != null)
-            {
-                staffModel.roomNr = staff.roomNr;
-            }            
+            staffModel.roomNr = staff.roomNr;
             staffModel.isAdmin = Convert.ToBoolean(staff.isAdmin);
 
             return staffModel;
@@ -129,6 +129,7 @@ namespace Service.CustomMapper
         internal static Staff Staff(StaffModel staffModel)
         {
             Staff s = new Staff();
+            s.staffId = staffModel.staffId;
             s.email = staffModel.email;
             s.firstname = staffModel.firstname;
             s.lastname = staffModel.lastname;
