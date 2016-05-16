@@ -11,7 +11,13 @@ using Service.Services;
 namespace CorridorAPI.Controllers
 {
     public class UserController : ApiController
-    {        
+    {
+        IStaffServices _staffServices;
+        public UserController()
+        {
+            _staffServices = new StaffServices();
+        }
+
         /* GET: Api/User
            Returns: all users */
         [Authorize]
@@ -23,7 +29,7 @@ namespace CorridorAPI.Controllers
             try
             {
                 StaffModels staffs = new StaffModels();
-                staffs.staffModels = CustomMapper.MapTo.StaffModel(Repository.Repositories.StaffRepository.List());
+                staffs.staffModels = _staffServices.List();
                 return Json(staffs);
             }
             catch (Exception e)
@@ -45,7 +51,7 @@ namespace CorridorAPI.Controllers
             try
             {
                 StaffModels staffs = new StaffModels();
-                staffs.staffModels = CustomMapper.MapTo.StaffModel(Repository.Repositories.StaffRepository.List(corridorNr));
+                staffs.staffModels = _staffServices.List(corridorNr); 
                 return Json(staffs);
             }
             catch (Exception e)
@@ -64,10 +70,14 @@ namespace CorridorAPI.Controllers
             var identity = User.Identity as ClaimsIdentity;
             string authenticatedUser = identity.FindFirst("sub").Value;
 
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
             try
             {
-                Repository.Repositories.StaffRepository.Update(CustomMapper.MapTo.Staff(staffModel));
-                
+                _staffServices.Update(staffModel);
                 return Ok();
             }
             catch (Exception e)
@@ -86,12 +96,17 @@ namespace CorridorAPI.Controllers
             var identity = User.Identity as ClaimsIdentity;
             string authenticatedUser = identity.FindFirst("sub").Value;
 
+            if (username == null)
+            {
+                return BadRequest("Username may not be null");
+            }
+
             try
             {
-                Repository.Repositories.StaffRepository.Delete(username);
+                _staffServices.Delete(username);
                 AuthRepository _repo = new AuthRepository();
                 _repo.Delete(username);
-                return Ok("deleted");
+                return Ok("User Deleted");
             }
             catch (Exception e)
             {

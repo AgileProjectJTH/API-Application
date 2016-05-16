@@ -1,4 +1,5 @@
 ﻿using Common.Models;
+using Repository.Interface;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,14 +8,14 @@ using System.Threading.Tasks;
 
 namespace Repository.Repositories
 {
-    public class StaffRepository
+    public class StaffRepository : IStaffRepository
     {   
         /// <summary>
         /// returns a staff with staffId = staffId
         /// </summary>
         /// <param name="staffId"></param>
         /// <returns></returns>
-        public static Staff Get(int staffId)
+        public Staff Get(int staffId)
         {
             try
             {
@@ -36,7 +37,7 @@ namespace Repository.Repositories
         /// </summary>
         /// <param name="username"></param>
         /// <returns></returns>
-        public static Repository.Staff Get(string username)
+        public Repository.Staff Get(string username)
         {
             try
             {
@@ -58,7 +59,7 @@ namespace Repository.Repositories
         /// returns a list of ALL users
         /// </summary>
         /// <returns>returns a list of ALL users</returns>
-        public static List<Repository.Staff> List()
+        public List<Repository.Staff> List()
         {
             try
             {
@@ -81,7 +82,7 @@ namespace Repository.Repositories
         /// </summary>
         /// <param name="corridorId"></param>
         /// <returns>Returns user from corridor with id = corridorId</returns>
-        public static List<Repository.Staff> List(int corridorId)
+        public List<Repository.Staff> List(int corridorId)
         {
             try
             {
@@ -108,7 +109,7 @@ namespace Repository.Repositories
         /// Deletes staff with username = username
         /// </summary>
         /// <param name="username"></param>
-        public static void Delete(string username)
+        public void Delete(string username)
         {
             try
             {
@@ -158,7 +159,7 @@ namespace Repository.Repositories
         /// updates staff with username = updatedStaff.username
         /// </summary>
         /// <param name="updatedStaff"></param>
-        public static void Update(Staff updatedStaff)
+        public void Update(Staff updatedStaff)
         {
             try
             {

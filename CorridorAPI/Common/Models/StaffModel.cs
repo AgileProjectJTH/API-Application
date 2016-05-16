@@ -2,6 +2,7 @@
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -42,16 +43,26 @@ namespace Common.Models
         {
             return JsonConvert.SerializeObject(staff);
         }
-        
+
+        [Required(ErrorMessage = "StaffId is Required")]
         public int staffId { get; set; }
+        [Required(ErrorMessage = "Username is Required")]
         public string username { get; set; }
+        [Required(ErrorMessage = "RoomNr is Required")]
         public string roomNr { get; set; }
+        [Required(ErrorMessage = "Signature is Required")]
         public string signature { get; set; }
+        [Required(ErrorMessage = "Firstname is Required")]
         public string firstname { get; set; }
+        [Required(ErrorMessage = "Lastname is Required")]
         public string lastname { get; set; }
+        [Required(ErrorMessage = "Mobile is Required")]
         public string mobile { get; set; }
+        [Required(ErrorMessage = "Email is Required")]
         public string email { get; set; }
+        [Required(ErrorMessage = "IsAdmin is Required")]
         public bool isAdmin { get; set; }
+        [Required(ErrorMessage = "Password is Required")]
         public string password { get; set; }
 
         public List<Schedule> schedules { get; set; }

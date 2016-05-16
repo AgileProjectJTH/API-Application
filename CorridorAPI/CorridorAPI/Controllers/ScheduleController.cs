@@ -1,6 +1,8 @@
 ﻿using Common.Models;
 using CorridorAPI.Models;
 using Repository.Repositories;
+using Service.Interface;
+using Service.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,6 +15,13 @@ namespace CorridorAPI.Controllers
 {
     public class ScheduleController : ApiController
     {
+
+        IStaffServices _staffServices;
+        public ScheduleController()
+        {
+            _staffServices = new StaffServices();
+        }
+
         /* POST: Api/Schedule            
          * Param: Date need format yyyy-mm-dd hh:mm:ss
          * Set staff to unavaible */
@@ -24,7 +33,8 @@ namespace CorridorAPI.Controllers
 
             try
             {
-                StaffModel user = CustomMapper.MapTo.StaffModel(Repository.Repositories.StaffRepository.Get(authenticatedUser));
+                StaffModel user = _staffServices.Get(authenticatedUser);
+                    
 
                 if (scheduleModel.toDateAndTime == null)
                 {
@@ -106,7 +116,7 @@ namespace CorridorAPI.Controllers
         public IHttpActionResult DELETE(string dateAndTime, string toDateAndTime)
         {
 
-            //BDO WE NEED IT???
+            //DO WE NEED IT???
             return null;
         }
 
@@ -118,12 +128,18 @@ namespace CorridorAPI.Controllers
             var identity = User.Identity as ClaimsIdentity;
             string authenticatedUser = identity.FindFirst("sub").Value;
 
+            DateTime dt;
+            if (DateTime.TryParse(dateAndTime, out dt))
+            {
+                return BadRequest("wrong format on dateAndTime");
+            }
+
             try
             {
-                StaffModel user = CustomMapper.MapTo.StaffModel(Repository.Repositories.StaffRepository.Get(authenticatedUser));                
+                StaffModel user = _staffServices.Get(authenticatedUser);               
                 string date = dateAndTime.Substring(0, 10);
-                StaffModels staffs = new StaffModels(kronox.getSchedule("E2420", date));                
-                StaffModel staff = CustomMapper.MapTo.StaffModel(StaffRepository.Get(user.staffId));
+                StaffModels staffs = new StaffModels(kronox.getSchedule(user.roomNr, date));
+                StaffModel staff = _staffServices.Get(user.staffId); 
                 staff.schedules.AddRange(CustomMapper.MapTo.Schedules(TaskRepository.List(user.roomNr)));
                 staffs.staffModels.Add(staff);
                 return Json(staffs);
