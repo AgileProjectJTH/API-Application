@@ -36,7 +36,7 @@ namespace Service.Services
                 string time = dateAndTime.Substring(11, 5);
                 bool isAvailable = true;
                 //set false if Lunchtime
-                if (Convert.ToInt32(dateAndTime.Substring(13, 1)) == 2)
+                if (Convert.ToInt32(dateAndTime.Substring(12, 1)) == 2)
                 {
                     isAvailable = false;
                 }

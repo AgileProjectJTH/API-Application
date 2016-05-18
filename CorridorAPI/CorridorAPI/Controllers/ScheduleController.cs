@@ -79,7 +79,7 @@ namespace CorridorAPI.Controllers
             string authenticatedUser = identity.FindFirst("sub").Value;
 
             DateTime dt;
-            if (DateTime.TryParse(dateAndTime, out dt))
+            if (!DateTime.TryParse(dateAndTime, out dt))
             {
                 return BadRequest("wrong format on dateAndTime");
             }
