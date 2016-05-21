@@ -252,6 +252,7 @@
     <Compile Include="TestCorridorServices.cs" />
     <Compile Include="TestUserServices.cs" />
     <Compile Include="TestStaffServices.cs" />
+    <Compile Include="TestScheduleServices.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Common\Common.csproj">

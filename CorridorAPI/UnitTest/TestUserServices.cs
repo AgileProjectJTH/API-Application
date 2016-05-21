@@ -4,7 +4,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Service.Services;
 using Common.Models;
 
-namespace Services.Test
+namespace Service.Test
 {
     [TestClass]
     public class TestUserServices

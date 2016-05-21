@@ -12,12 +12,6 @@ namespace Service.Test
     public class TestCorridorSercives
     {
 
-        [TestInitialize]
-        public void TestSetup()
-        {
-        }
-
-
         /* Checks if able to add new Corridor. */
         [TestMethod]
         public void Test_CorridorServices_Add_New_Corridor()
@@ -228,10 +222,5 @@ namespace Service.Test
             }
         }
 
-
-        [TestCleanup]
-        public void TestCleanup()
-        {
-        }
     }
 }
