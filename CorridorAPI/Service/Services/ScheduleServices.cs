@@ -148,9 +148,9 @@ namespace Service.Services
                 for (int i = 0; i < numberOfDays; i++)
                 {
                     string date = startDay.AddDays(i).ToString().Substring(0, 10);
-                    schedules.Add(new Schedule(scheduleModel.roomNr, date, "07-00", "17-00"));
+                    schedules.Add(new Schedule(scheduleModel.roomNr, date, "07-00", "17-00", scheduleModel.available));
                 }
-                schedules.Add(new Schedule(scheduleModel.roomNr, scheduleModel.toDateAndTime.Substring(0, 10), "07-00", scheduleModel.toDateAndTime.Substring(11, 5)));
+                schedules.Add(new Schedule(scheduleModel.roomNr, scheduleModel.toDateAndTime.Substring(0, 10), "07-00", scheduleModel.toDateAndTime.Substring(11, 5), scheduleModel.available));
                 _taskRepository.Post(CustomMapper.MapTo.Task(schedules), username);
 
                 return "";
@@ -163,7 +163,7 @@ namespace Service.Services
                 string fromDate = scheduleModel.fromDateAndTime.Substring(0, 10);
                 string from = scheduleModel.fromDateAndTime.Substring(11, 5);
 
-                Schedule schedule = new Schedule(scheduleModel.roomNr, fromDate, from, to);
+                Schedule schedule = new Schedule(scheduleModel.roomNr, fromDate, from, to, scheduleModel.available);
                 if (scheduleModel.scheduleInfo != null)
                 {
                     schedule.moment = scheduleModel.scheduleInfo;

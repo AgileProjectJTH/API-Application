@@ -16,12 +16,13 @@ namespace Common.Models
         /// <param name="newDate">Date format yyyy-mm-dd-hh-mm-ss</param>
         /// <param name="NewFrom">Time format hh-mm</param>
         /// <param name="NewTo">Time format hh-mm</param>
-        public Schedule(string newRoom, string newDate, string NewFrom, string NewTo)
+        public Schedule(string newRoom, string newDate, string NewFrom, string newTo, bool newIsAvailable)
         {
             room = newRoom;
             date = newDate;
             from = NewFrom;
-            to = NewTo;
+            to = newTo;
+            isAvailable = newIsAvailable;
         }
         public string room { get; set; }
         public string date { get; set; }
