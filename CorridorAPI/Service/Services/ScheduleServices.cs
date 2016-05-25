@@ -180,6 +180,64 @@ namespace Service.Services
         }
 
         /// <summary>
+        /// Extra functionen needed to make Automatic avaibility work
+        /// </summary>
+        /// <param name="scheduleModel"></param>
+        /// <param name="user"></param>
+        private void setAutomaticAvaibility(ScheduleModel scheduleModel, StaffModel user)
+        {    string tempToDate = scheduleModel.toDateAndTime;
+            scheduleModel.fromDateAndTime = scheduleModel.toDateAndTime;
+
+            if (scheduleModel.available == true)
+            {
+                scheduleModel.available = false;
+            }
+            else
+            {
+                scheduleModel.available = true;
+            }
+
+            List<Schedule> lSchedule = CustomMapper.MapTo.Schedules(_taskRepository.List(user.roomNr)).OrderBy(x => x.from).ToList();
+            if (lSchedule.Count != 0)
+            {
+                foreach (Schedule s in lSchedule)
+                {
+                    if (Convert.ToInt32(scheduleModel.fromDateAndTime.Substring(12, 2)) < Convert.ToInt32(s.from.Substring(12, 2)))
+                    {
+                        if (scheduleModel.toDateAndTime == null)
+                        {
+                            scheduleModel.toDateAndTime = s.from;
+                        }
+                        else if (Convert.ToInt32(scheduleModel.toDateAndTime.Substring(12, 2)) > Convert.ToInt32(s.from.Substring(12, 2)))
+                        {
+                            scheduleModel.toDateAndTime = s.from;
+                        }
+                    }
+                }
+            }
+            else
+            {
+                scheduleModel.toDateAndTime = scheduleModel.fromDateAndTime.Substring(0, 11) + "17:00:00";
+            }
+
+            string to = scheduleModel.toDateAndTime.Substring(11, 5);
+            string fromDate = scheduleModel.fromDateAndTime.Substring(0, 10);
+            string from = scheduleModel.fromDateAndTime.Substring(11, 5);
+
+            Schedule schedule = new Schedule(scheduleModel.roomNr, fromDate, from, to, scheduleModel.available);
+            if (scheduleModel.scheduleInfo != null)
+            {
+                schedule.moment = scheduleModel.scheduleInfo;
+            }
+            if (scheduleModel.course != null)
+            {
+                schedule.course = scheduleModel.course;
+            }
+            _taskRepository.Post(CustomMapper.MapTo.Task(schedule), user.username);
+
+        }
+
+        /// <summary>
         /// Adds a Schedule
         /// </summary>
         /// <param name="schedule"></param>
