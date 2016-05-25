@@ -118,15 +118,15 @@ namespace Service.Services
                 {
                     foreach (Schedule s in lSchedule)
                     {
-                        if (Convert.ToInt32(scheduleModel.fromDateAndTime.Substring(12, 2)) < Convert.ToInt32(s.from.Substring(12, 2)))
+                        if (Convert.ToInt32(scheduleModel.fromDateAndTime.Substring(11, 2)) < Convert.ToInt32(s.from.Substring(0, 2)))
                         {
                             if (scheduleModel.toDateAndTime == null)
                             {
-                                scheduleModel.toDateAndTime = s.from;
+                                scheduleModel.toDateAndTime = scheduleModel.fromDateAndTime.Substring(0, 11) + s.from + ":00";
                             }
-                            else if (Convert.ToInt32(scheduleModel.toDateAndTime.Substring(12, 2)) > Convert.ToInt32(s.from.Substring(12, 2)))
+                            else if (Convert.ToInt32(scheduleModel.toDateAndTime.Substring(11, 2)) > Convert.ToInt32(s.from.Substring(0, 2)))
                             {
-                                scheduleModel.toDateAndTime = s.from;
+                                scheduleModel.toDateAndTime = scheduleModel.fromDateAndTime.Substring(0, 11) + s.from + ":00";
                             }
                         }
                     }

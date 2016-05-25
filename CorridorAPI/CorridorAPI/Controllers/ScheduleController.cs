@@ -71,6 +71,44 @@ namespace CorridorAPI.Controllers
         }
 
         /* GET: Api/Schedule
+          Returns: Returns schedule of given date for username = username */
+        [Authorize]
+        public IHttpActionResult GET(string dateAndTime, string username)
+        {
+            var identity = User.Identity as ClaimsIdentity;
+            string authenticatedUser = identity.FindFirst("sub").Value;
+
+            DateTime dt;
+            if (!DateTime.TryParse(dateAndTime, out dt))
+            {
+                return BadRequest("wrong format on dateAndTime");
+            }
+
+            try
+            {
+                StaffModel user = _staffServices.Get(authenticatedUser);
+                if (user.isAdmin)
+                {
+                    StaffModel userToGet = _staffServices.Get(username);
+                    string date = dateAndTime.Substring(0, 10);
+                    StaffModels staffs = new StaffModels(_kronox.getSchedule(userToGet.roomNr, date));
+                    StaffModel staff = _staffServices.Get(userToGet.staffId);
+                    staff.schedules.AddRange(_scheduleServices.List(userToGet.roomNr));
+                    staffs.staffModels.Add(staff);
+                    return Json(staffs);
+                }
+                else
+                {
+                    return BadRequest("Action not allowed for current user");
+                }
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
+        }
+
+        /* GET: Api/Schedule
            Returns: Returns schedule of given date for current user */
         [Authorize]
         public IHttpActionResult GET(string dateAndTime)

@@ -11,6 +11,7 @@ namespace Common.Models
     {
         [Required]
         public string fromDateAndTime { get; set; }
+
         public string toDateAndTime { get; set; } //if null API sets time for you
         //roomnumber were staff will be
         public string roomNr { get; set; } //null from apps
