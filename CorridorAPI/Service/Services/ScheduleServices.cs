@@ -137,6 +137,11 @@ namespace Service.Services
                 }
             }
 
+            if (scheduleModel.toDateAndTime == null)
+            {
+                scheduleModel.toDateAndTime = scheduleModel.fromDateAndTime.Substring(0, 11) + "17:00:00";
+            }
+
             //get number of days
             int numberOfDays = (Convert.ToInt32(Math.Floor((DateTime.Parse(scheduleModel.toDateAndTime) - DateTime.Parse(scheduleModel.fromDateAndTime)).TotalDays)) + 1);
 
