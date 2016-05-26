@@ -40,24 +40,7 @@ namespace Service.Services
                 {
                     isAvailable = false;
                 }
-                StaffModel user = _staffServices.Get(username);
-
-                //Check Database schadules
-                List<Schedule> schedule = CustomMapper.MapTo.Schedules(_taskRepository.List(user.roomNr));
-                for (int i = 0; i < schedule.Count; i++)
-                {
-                    string from = schedule[i].from;
-                    string to = schedule[i].to;
-                    if (Convert.ToInt32(from.Substring(0, 2)) <= Convert.ToInt32(time.Substring(0, 2)) &&
-                        Convert.ToInt32(from.Substring(3, 2)) <= Convert.ToInt32(time.Substring(3, 2)))
-                    {
-                        if (Convert.ToInt32(to.Substring(0, 2)) >= Convert.ToInt32(time.Substring(0, 2)) &&
-                            Convert.ToInt32(to.Substring(3, 2)) >= Convert.ToInt32(time.Substring(3, 2)))
-                        {
-                            isAvailable = schedule[i].isAvailable;
-                        }
-                    }
-                }
+                StaffModel user = _staffServices.Get(username);            
 
                 //checks with kronox schedule if current user is available or not   
                 StaffModels staffmodels = new StaffModels(_kronox.getSchedule(user.roomNr, date));
@@ -83,8 +66,25 @@ namespace Service.Services
 
                 }
 
+                //Check Database schadules
+                List<Schedule> schedule = CustomMapper.MapTo.Schedules(_taskRepository.List(user.roomNr));
+                for (int i = 0; i < schedule.Count; i++)
+                {
+                    string from = schedule[i].from;
+                    string to = schedule[i].to;
+                    if (Convert.ToInt32(from.Substring(0, 2)) <= Convert.ToInt32(time.Substring(0, 2)) &&
+                        Convert.ToInt32(from.Substring(3, 2)) <= Convert.ToInt32(time.Substring(3, 2)))
+                    {
+                        if (Convert.ToInt32(to.Substring(0, 2)) >= Convert.ToInt32(time.Substring(0, 2)) &&
+                            Convert.ToInt32(to.Substring(3, 2)) >= Convert.ToInt32(time.Substring(3, 2)))
+                        {
+                            isAvailable = schedule[i].isAvailable;
+                        }
+                    }
+                }
                 return isAvailable;
             }
+
             catch (Exception)
             {
 
