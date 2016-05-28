@@ -133,13 +133,13 @@ namespace Service.Services
                 }
                 else
                 {
-                    scheduleModel.toDateAndTime = scheduleModel.fromDateAndTime.Substring(0, 11) + "17:00:00";
+                    scheduleModel.toDateAndTime = scheduleModel.fromDateAndTime.Substring(0, 11) + "23:59:59";
                 }
             }
 
-            if (scheduleModel.toDateAndTime == null)
+            if (scheduleModel.toDateAndTime == null || Convert.ToInt32(scheduleModel.fromDateAndTime.Substring(11, 2)) >= 17 )
             {
-                scheduleModel.toDateAndTime = scheduleModel.fromDateAndTime.Substring(0, 11) + "17:00:00";
+                scheduleModel.toDateAndTime = scheduleModel.fromDateAndTime.Substring(0, 11) + "23:59:59";
             }
 
             //get number of days
@@ -153,7 +153,7 @@ namespace Service.Services
                 for (int i = 0; i < numberOfDays; i++)
                 {
                     string date = startDay.AddDays(i).ToString().Substring(0, 10);
-                    schedules.Add(new Schedule(scheduleModel.roomNr, date, "07-00", "17-00", scheduleModel.available));
+                    schedules.Add(new Schedule(scheduleModel.roomNr, date, "07:00", "23:59", scheduleModel.available));
                 }
                 schedules.Add(new Schedule(scheduleModel.roomNr, scheduleModel.toDateAndTime.Substring(0, 10), "07-00", scheduleModel.toDateAndTime.Substring(11, 5), scheduleModel.available));
                 _taskRepository.Post(CustomMapper.MapTo.Task(schedules), username);
@@ -220,9 +220,9 @@ namespace Service.Services
                     }
                 }
             }
-            else
+            else 
             {
-                scheduleModel.toDateAndTime = scheduleModel.fromDateAndTime.Substring(0, 11) + "17:00:00";
+                scheduleModel.toDateAndTime = scheduleModel.fromDateAndTime.Substring(0, 11) + "23:59:59";
             }
 
             string to = scheduleModel.toDateAndTime.Substring(11, 5);
