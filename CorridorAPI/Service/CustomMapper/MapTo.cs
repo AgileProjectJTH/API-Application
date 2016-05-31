@@ -17,6 +17,7 @@ namespace Service.CustomMapper
         internal static Schedule Schedule(Task task)
         {
             Schedule schedule = new Schedule();
+            schedule.taskId = task.taskId;
             schedule.course = task.course;
             schedule.date = task.date;
             schedule.from = task.fromTime;
@@ -70,6 +71,10 @@ namespace Service.CustomMapper
             t.toTime = schedule.to;
             t.room = schedule.room;
             t.isAailable = schedule.isAvailable;
+            if (schedule.taskId != 0)
+            {
+                t.taskId = schedule.taskId;
+            }            
             if (schedule.moment != null)
             {
                 t.moment = schedule.moment;

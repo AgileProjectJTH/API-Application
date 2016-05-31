@@ -24,6 +24,7 @@ namespace Common.Models
             to = newTo;
             isAvailable = newIsAvailable;
         }
+        public int taskId { get; set; }
         public string room { get; set; }
         public string date { get; set; }
         public string from { get; set; }
