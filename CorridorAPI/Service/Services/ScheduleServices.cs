@@ -60,7 +60,7 @@ namespace Service.Services
                             {
                                 isAvailable = false;
                             }
-                            if (Convert.ToInt32(to.Substring(0, 2)) > Convert.ToInt32(time.Substring(0, 2)))
+                            else if (Convert.ToInt32(to.Substring(0, 2)) > Convert.ToInt32(time.Substring(0, 2)))
                             {
                                 isAvailable = false;
                             }
