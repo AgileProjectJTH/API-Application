@@ -30,11 +30,6 @@ namespace Service.Interface
         /// <param name="username"></param>
         string Post(ScheduleModel scheduleModel, string username);
 
-        /// <summary>
-        /// Adds a Schedule
-        /// </summary>
-        /// <param name="schedule"></param>
-        /// <param name="username"></param>
-        void Post(Schedule schedule, string username);
+       
     }
 }

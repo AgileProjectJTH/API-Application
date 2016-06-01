@@ -115,14 +115,15 @@ namespace Service.Services
                 {
                     foreach (Schedule s in lSchedule)
                     {
-                        if (Convert.ToInt32(scheduleModel.fromDateAndTime.Substring(11, 2)) == Convert.ToInt32(s.from.Substring(0, 2)) && Convert.ToInt32(scheduleModel.fromDateAndTime.Substring(14, 2)) < Convert.ToInt32(s.from.Substring(3, 2)))
+                        if (Convert.ToInt32(scheduleModel.fromDateAndTime.Substring(11, 2)) == Convert.ToInt32(s.from.Substring(0, 2)))                         
                         {
                             if (scheduleModel.toDateAndTime == null)
                             {
-                                scheduleModel.toDateAndTime = scheduleModel.fromDateAndTime.Substring(0, 11) + s.from + ":59";
+                                scheduleModel.toDateAndTime = scheduleModel.fromDateAndTime.Substring(0, 11) + s.to + ":59";
                             }
 
-                            else if (Convert.ToInt32(scheduleModel.toDateAndTime.Substring(11, 2)) == Convert.ToInt32(s.from.Substring(0, 2)) && Convert.ToInt32(scheduleModel.toDateAndTime.Substring(14, 2)) > Convert.ToInt32(s.from.Substring(3, 2)))
+                            else if (Convert.ToInt32(scheduleModel.toDateAndTime.Substring(11, 2)) == Convert.ToInt32(s.from.Substring(0, 2)) 
+                                && Convert.ToInt32(scheduleModel.toDateAndTime.Substring(14, 2)) > Convert.ToInt32(s.from.Substring(3, 2)))
                             {
                                 scheduleModel.toDateAndTime = scheduleModel.fromDateAndTime.Substring(0, 11) + s.from + ":59";
                             }
@@ -141,7 +142,8 @@ namespace Service.Services
                                 scheduleModel.toDateAndTime = scheduleModel.fromDateAndTime.Substring(0, 11) + s.from + ":59";
                             }
 
-                            else if (Convert.ToInt32(scheduleModel.toDateAndTime.Substring(11, 2)) == Convert.ToInt32(s.from.Substring(0, 2)) && Convert.ToInt32(scheduleModel.toDateAndTime.Substring(14, 2)) > Convert.ToInt32(s.from.Substring(3, 2)))
+                            else if (Convert.ToInt32(scheduleModel.toDateAndTime.Substring(11, 2)) == Convert.ToInt32(s.from.Substring(0, 2)) 
+                                && Convert.ToInt32(scheduleModel.toDateAndTime.Substring(14, 2)) > Convert.ToInt32(s.from.Substring(3, 2)))
                             {
                                 scheduleModel.toDateAndTime = scheduleModel.fromDateAndTime.Substring(0, 11) + s.from + ":59";
                             }
@@ -161,14 +163,16 @@ namespace Service.Services
                     {
                         foreach (Schedule s in sM.schedules)
                         {
-                            if (Convert.ToInt32(scheduleModel.fromDateAndTime.Substring(11, 2)) == Convert.ToInt32(s.from.Substring(0, 2)) && Convert.ToInt32(scheduleModel.fromDateAndTime.Substring(14, 2)) < Convert.ToInt32(s.from.Substring(3, 2)))
+                            if (Convert.ToInt32(scheduleModel.fromDateAndTime.Substring(11, 2)) == Convert.ToInt32(s.from.Substring(0, 2)) 
+                                && Convert.ToInt32(scheduleModel.fromDateAndTime.Substring(14, 2)) < Convert.ToInt32(s.from.Substring(3, 2)))
                             {
                                 if (scheduleModel.toDateAndTime == null)
                                 {
                                     scheduleModel.toDateAndTime = scheduleModel.fromDateAndTime.Substring(0, 11) + s.from + ":59";
                                 }
 
-                                else if (Convert.ToInt32(scheduleModel.toDateAndTime.Substring(11, 2)) == Convert.ToInt32(s.from.Substring(0, 2)) && Convert.ToInt32(scheduleModel.toDateAndTime.Substring(14, 2)) > Convert.ToInt32(s.from.Substring(3, 2)))
+                                else if (Convert.ToInt32(scheduleModel.toDateAndTime.Substring(11, 2)) == Convert.ToInt32(s.from.Substring(0, 2)) 
+                                    && Convert.ToInt32(scheduleModel.toDateAndTime.Substring(14, 2)) > Convert.ToInt32(s.from.Substring(3, 2)))
                                 {
                                     scheduleModel.toDateAndTime = scheduleModel.fromDateAndTime.Substring(0, 11) + s.from + ":59";
                                 }
@@ -187,7 +191,8 @@ namespace Service.Services
                                     scheduleModel.toDateAndTime = scheduleModel.fromDateAndTime.Substring(0, 11) + s.from + ":59";
                                 }
 
-                                else if (Convert.ToInt32(scheduleModel.toDateAndTime.Substring(11, 2)) == Convert.ToInt32(s.from.Substring(0, 2)) && Convert.ToInt32(scheduleModel.toDateAndTime.Substring(14, 2)) > Convert.ToInt32(s.from.Substring(3, 2)))
+                                else if (Convert.ToInt32(scheduleModel.toDateAndTime.Substring(11, 2)) == Convert.ToInt32(s.from.Substring(0, 2)) 
+                                    && Convert.ToInt32(scheduleModel.toDateAndTime.Substring(14, 2)) > Convert.ToInt32(s.from.Substring(3, 2)))
                                 {
                                     scheduleModel.toDateAndTime = scheduleModel.fromDateAndTime.Substring(0, 11) + s.from + ":59";
                                 }
@@ -288,17 +293,20 @@ namespace Service.Services
                                     string newFrom = (100 + Convert.ToInt32(schedule.from.Substring(3, 2)) - 1).ToString();
                                     s.to = schedule.from.Substring(0, 3) + newFrom.Substring(1,2);
                                     _taskRepository.updateTask(CustomMapper.MapTo.Task(s));
+                                    return;
                                 }
                                 else
                                 {
                                     string newFrom = (100 + Convert.ToInt32(schedule.from.Substring(0, 2)) - 1).ToString() + ":59";
                                     s.to = newFrom.Substring(1,5);
                                     _taskRepository.updateTask(CustomMapper.MapTo.Task(s));
+                                    return;
                                 }
                             }
                             else
                             {
                                 _taskRepository.Delete(s.taskId);
+                                return;
                             }
                         }
 
@@ -315,6 +323,7 @@ namespace Service.Services
                                         string tempTo = (100 + Convert.ToInt32(schedule.from.Substring(3, 2)) - 1).ToString();
                                         s.to = schedule.from.Substring(0, 3) + tempTo.Substring(1,2);
                                         _taskRepository.updateTask(CustomMapper.MapTo.Task(s));
+                                        return;
                                     }
 
                                     else
@@ -324,6 +333,7 @@ namespace Service.Services
                                         string tempTo = (100 + Convert.ToInt32(schedule.from.Substring(3, 2)) - 1).ToString();
                                         s.to = schedule.from.Substring(0, 3) + tempTo.Substring(1, 2);
                                         _taskRepository.updateTask(CustomMapper.MapTo.Task(s));
+                                        return;
                                     }
                                 }
                                 else
@@ -335,6 +345,7 @@ namespace Service.Services
                                         string tempTo = (100 + Convert.ToInt32(schedule.from.Substring(0, 2)) - 1).ToString() + ":59";
                                         s.to = tempTo.Substring(1, 5);
                                         _taskRepository.updateTask(CustomMapper.MapTo.Task(s));
+                                        return;
                                     }
 
                                     else
@@ -344,6 +355,7 @@ namespace Service.Services
                                         string tempTo = (100 + Convert.ToInt32(schedule.from.Substring(0, 2)) - 1).ToString() + ":59";
                                         s.to = tempTo.Substring(1, 5);
                                         _taskRepository.updateTask(CustomMapper.MapTo.Task(s));
+                                        return;
                                     }
                                 }
                             }
@@ -354,6 +366,7 @@ namespace Service.Services
                                     string newFrom = (100 + Convert.ToInt32(schedule.to.Substring(3, 2) + 1).ToString());
                                     newSchedule(s, user.username, (schedule.to.Substring(0, 3) + newFrom.Substring(1,2)));
                                     _taskRepository.Delete(s.taskId);
+                                    return;
                                 }
 
                                 else
@@ -361,6 +374,7 @@ namespace Service.Services
                                     string newFrom = (100 + Convert.ToInt32(schedule.to.Substring(0, 2)) + 1).ToString() + ":00";
                                     newSchedule(s, user.username, newFrom.Substring(1,5));
                                     _taskRepository.Delete(s.taskId);
+                                    return;
                                 }
                             }
                         }
@@ -376,17 +390,20 @@ namespace Service.Services
                                 string newFrom = (100 + Convert.ToInt32(schedule.to.Substring(3, 2)) + 1).ToString();
                                 s.from = schedule.to.Substring(0, 3) + newFrom.Substring(1,2);
                                 _taskRepository.updateTask(CustomMapper.MapTo.Task(s));
+                                return;
                             }
                             else
                             {
                                 string newFrom = (100 + Convert.ToInt32(schedule.to.Substring(0, 2)) + 1).ToString() + ":00";
                                 s.to = newFrom.Substring(1,5);
                                 _taskRepository.updateTask(CustomMapper.MapTo.Task(s));
+                                return;
                             }
                         }
                         else
                         {
                             _taskRepository.Delete(s.taskId);
+                            return;
                         }
                     }
                 }
@@ -469,15 +486,6 @@ namespace Service.Services
             _taskRepository.Post(CustomMapper.MapTo.Task(schedule), user.username);
 
         }
-
-        /// <summary>
-        /// Adds a Schedule
-        /// </summary>
-        /// <param name="schedule"></param>
-        /// <param name="username"></param>
-        public void Post(Schedule schedule, string username)
-        {
-
-        }
+       
     }
 }
