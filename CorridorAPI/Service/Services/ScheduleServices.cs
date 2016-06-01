@@ -75,8 +75,12 @@ namespace Service.Services
                     if (Convert.ToInt32(from.Substring(0, 2)) <= Convert.ToInt32(time.Substring(0, 2)) &&
                         Convert.ToInt32(from.Substring(3, 2)) <= Convert.ToInt32(time.Substring(3, 2)))
                     {
-                        if (Convert.ToInt32(to.Substring(0, 2)) >= Convert.ToInt32(time.Substring(0, 2)) &&
+                        if (Convert.ToInt32(to.Substring(0, 2)) == Convert.ToInt32(time.Substring(0, 2)) &&
                             Convert.ToInt32(to.Substring(3, 2)) >= Convert.ToInt32(time.Substring(3, 2)))
+                        {
+                            isAvailable = schedule[i].isAvailable;
+                        }
+                        else if (Convert.ToInt32(to.Substring(0, 2)) > Convert.ToInt32(time.Substring(0, 2)))
                         {
                             isAvailable = schedule[i].isAvailable;
                         }
