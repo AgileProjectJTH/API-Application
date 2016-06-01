@@ -64,14 +64,13 @@ namespace Service.Services
                             {
                                 isAvailable = false;
                             }
-
                         }
                     }
 
                 }
 
                 //Check Database schadules
-                List<Schedule> schedule = CustomMapper.MapTo.Schedules(_taskRepository.List(user.roomNr));
+                List<Schedule> schedule = CustomMapper.MapTo.Schedules(_taskRepository.List(user.roomNr, date));
                 for (int i = 0; i < schedule.Count; i++)
                 {
                     string from = schedule[i].from;
