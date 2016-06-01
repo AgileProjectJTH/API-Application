@@ -154,8 +154,8 @@ namespace Service.Services
                     }
                 }
                 //Check with database
-                StaffModels staffmodels = new StaffModels(_kronox.getSchedule(user.roomNr, scheduleModel.fromDateAndTime));
-                if (lSchedule.Count != 0)
+                StaffModels staffmodels = new StaffModels(_kronox.getSchedule(user.roomNr, scheduleModel.fromDateAndTime.Substring(0,10)));
+                if (staffmodels.staffModels.Count != 0)
                 {
                     foreach (StaffModel sM in staffmodels.staffModels)
                     {
@@ -201,7 +201,7 @@ namespace Service.Services
                     }
                 }
 
-                else
+                else if(scheduleModel.toDateAndTime == null)
                 {
                     scheduleModel.toDateAndTime = scheduleModel.fromDateAndTime.Substring(0, 11) + "23:59:59";
                 }
